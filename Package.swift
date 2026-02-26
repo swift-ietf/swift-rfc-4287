@@ -38,7 +38,13 @@ let package = Package(
         .target(
             name: "RFC 4287",
             dependencies: [.rfc2822, .rfc3339, .rfc3987, .rfc4648]
-        )
+        ),
+        .testTarget(
+            name: "RFC 4287 Tests",
+            dependencies: [
+                "RFC 4287",
+            ]
+        ),
     ],
     swiftLanguageModes: [.v6]
 )
@@ -54,6 +60,7 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
         .enableUpcomingFeature("MemberImportVisibility"),
+        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
         .enableExperimentalFeature("Lifetimes"),
         .enableExperimentalFeature("SuppressedAssociatedTypes"),
         .enableExperimentalFeature("SuppressedAssociatedTypesWithDefaults"),
