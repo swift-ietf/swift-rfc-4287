@@ -1,6 +1,6 @@
 # swift-rfc-4287
 
-[![CI](https://github.com/swift-standards/swift-rfc-4287/workflows/CI/badge.svg)](https://github.com/swift-standards/swift-rfc-4287/actions/workflows/ci.yml)
+[![CI](https://github.com/swift-ietf/swift-rfc-4287/workflows/CI/badge.svg)](https://github.com/swift-ietf/swift-rfc-4287/actions/workflows/ci.yml)
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
 Type-safe Atom feed generation and parsing for Swift (RFC 4287 implementation).
@@ -23,7 +23,7 @@ Add swift-rfc-4287 to your Package.swift dependencies:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-standards/swift-rfc-4287", from: "0.1.0")
+    .package(url: "https://github.com/swift-ietf/swift-rfc-4287", from: "0.1.4")
 ]
 ```
 
