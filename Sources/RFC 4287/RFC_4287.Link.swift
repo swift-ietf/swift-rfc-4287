@@ -106,14 +106,16 @@ extension RFC_4287 {
                 lang: lang
             )
         }
+    }
+}
 
-        /// Returns true if this link should be treated as an "alternate" relation
-        ///
-        /// Per RFC 4287 Section 4.2.7.2: If the rel attribute is not present,
-        /// the link element MUST be interpreted as if the link relation type is "alternate".
-        public var isAlternate: Bool {
-            rel == .alternate || rel == nil
-        }
+extension RFC_4287.Link {
+    /// Returns true if this link should be treated as an "alternate" relation
+    ///
+    /// Per RFC 4287 Section 4.2.7.2: If the rel attribute is not present,
+    /// the link element MUST be interpreted as if the link relation type is "alternate".
+    public var isAlternate: Bool {
+        rel == .alternate || rel == nil
     }
 }
 
