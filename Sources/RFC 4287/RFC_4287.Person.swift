@@ -126,8 +126,8 @@ extension RFC_4287.Person: Codable {
 
         // Decode email as string and convert to AddrSpec
         if let emailString = try container.decodeIfPresent(String.self, forKey: .email) {
-            do {
-                email = try RFC_2822.AddrSpec(ascii: emailString.utf8)
+            do throws(RFC_2822.AddrSpec.Error) {
+                email = try RFC_2822.AddrSpec(ascii: emailString.utf8.map { Byte($0) })
             } catch {
                 throw DecodingError.dataCorruptedError(
                     forKey: .email,

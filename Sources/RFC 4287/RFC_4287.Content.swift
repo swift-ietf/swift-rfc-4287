@@ -12,15 +12,6 @@ extension RFC_4287 {
             case xhtml
             case media(String)  // e.g., "image/png", "application/pdf"
 
-            public var stringValue: String {
-                switch self {
-                case .text: return "text"
-                case .html: return "html"
-                case .xhtml: return "xhtml"
-                case .media(let type): return type
-                }
-            }
-
             public init(stringValue: String) {
                 switch stringValue {
                 case "text": self = .text
@@ -36,11 +27,6 @@ extension RFC_4287 {
                 let container = try decoder.singleValueContainer()
                 let string = try container.decode(String.self)
                 self.init(stringValue: string)
-            }
-
-            public func encode(to encoder: any Encoder) throws {
-                var container = encoder.singleValueContainer()
-                try container.encode(stringValue)
             }
         }
 
@@ -100,7 +86,7 @@ extension RFC_4287 {
             base: (any RFC_3987.IRI.Representable)? = nil,
             lang: String? = nil
         ) {
-            self.value = rawBytes.base64()
+            self.value = rawBytes.map { Byte($0) }.base64()
             self.type = .media(mediaType)
             self.src = nil
             self.base = base?.iri
@@ -144,30 +130,48 @@ extension RFC_4287 {
         ) {
             self.init(src: src.iri, type: type, base: base?.iri, lang: lang)
         }
+    }
+}
 
-        /// Determines if this content type requires base64 encoding per RFC 4287 Section 4.1.3.3
-        ///
-        /// Returns true if the content is a binary media type that requires base64 encoding:
-        /// - Not text, html, or xhtml
-        /// - Not an XML media type (doesn't end with /xml or +xml)
-        /// - Doesn't begin with "text/"
-        public var requiresBase64Encoding: Bool {
-            guard case .media(let mediaType) = type else {
-                return false
-            }
-
-            // Check if it's an XML media type
-            if mediaType.hasSuffix("/xml") || mediaType.hasSuffix("+xml") {
-                return false
-            }
-
-            // Check if it begins with "text/"
-            if mediaType.hasPrefix("text/") {
-                return false
-            }
-
-            // All other media types require base64 encoding
-            return true
+extension RFC_4287.Content.ContentType {
+    public var stringValue: String {
+        switch self {
+        case .text: return "text"
+        case .html: return "html"
+        case .xhtml: return "xhtml"
+        case .media(let type): return type
         }
+    }
+
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(stringValue)
+    }
+}
+
+extension RFC_4287.Content {
+    /// Determines if this content type requires base64 encoding per RFC 4287 Section 4.1.3.3
+    ///
+    /// Returns true if the content is a binary media type that requires base64 encoding:
+    /// - Not text, html, or xhtml
+    /// - Not an XML media type (doesn't end with /xml or +xml)
+    /// - Doesn't begin with "text/"
+    public var requiresBase64Encoding: Bool {
+        guard case .media(let mediaType) = type else {
+            return false
+        }
+
+        // Check if it's an XML media type
+        if mediaType.hasSuffix("/xml") || mediaType.hasSuffix("+xml") {
+            return false
+        }
+
+        // Check if it begins with "text/"
+        if mediaType.hasPrefix("text/") {
+            return false
+        }
+
+        // All other media types require base64 encoding
+        return true
     }
 }
