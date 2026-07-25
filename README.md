@@ -1,7 +1,7 @@
 # swift-rfc-4287
 
-[![CI](https://github.com/swift-ietf/swift-rfc-4287/workflows/CI/badge.svg)](https://github.com/swift-ietf/swift-rfc-4287/actions/workflows/ci.yml)
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
+[![CI](https://github.com/swift-ietf/swift-rfc-4287/workflows/CI/badge.svg)](https://github.com/swift-ietf/swift-rfc-4287/actions/workflows/ci.yml)
 
 Type-safe Atom feed generation and parsing for Swift (RFC 4287 implementation).
 
