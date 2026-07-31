@@ -58,9 +58,11 @@ extension RFC_4287 {
         ///   - lang: Language of the generator
         public init(
             value: String,
+            // REASON: optional existential parameter; generic respelling compiler-refuted (nil-literal call sites / overload ambiguity); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+            // swiftlint:disable:next no_any_protocol_existential
             uri: (any RFC_3987.IRI.Representable)?,
             version: String? = nil,
-            // REASON: nil-defaulted optional existential parameter; no lawful generic spelling (T? = nil defeats inference); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+            // REASON: optional existential parameter; generic respelling compiler-refuted (nil-literal call sites / overload ambiguity); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
             // swiftlint:disable:next no_any_protocol_existential
             base: (any RFC_3987.IRI.Representable)? = nil,
             lang: String? = nil

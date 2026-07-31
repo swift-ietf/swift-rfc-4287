@@ -74,9 +74,11 @@ extension RFC_4287.Person {
     ///   - lang: Language of the person construct
     public init(
         name: String,
+        // REASON: optional existential parameter; generic respelling compiler-refuted (nil-literal call sites / overload ambiguity); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+        // swiftlint:disable:next no_any_protocol_existential
         uri: (any RFC_3987.IRI.Representable)?,
         email: RFC_2822.AddrSpec? = nil,
-        // REASON: nil-defaulted optional existential parameter; no lawful generic spelling (T? = nil defeats inference); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+        // REASON: optional existential parameter; generic respelling compiler-refuted (nil-literal call sites / overload ambiguity); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
         // swiftlint:disable:next no_any_protocol_existential
         base: (any RFC_3987.IRI.Representable)? = nil,
         lang: String? = nil
@@ -152,7 +154,11 @@ extension RFC_4287.Person: Codable {
             throw error
         } catch {
             throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "\(error)", underlyingError: error)
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "\(error)",
+                    underlyingError: error
+                )
             )
         }
     }
@@ -174,7 +180,12 @@ extension RFC_4287.Person: Codable {
             throw error
         } catch {
             throw EncodingError.invalidValue(
-                self, EncodingError.Context(codingPath: encoder.codingPath, debugDescription: "\(error)", underlyingError: error)
+                self,
+                EncodingError.Context(
+                    codingPath: encoder.codingPath,
+                    debugDescription: "\(error)",
+                    underlyingError: error
+                )
             )
         }
     }

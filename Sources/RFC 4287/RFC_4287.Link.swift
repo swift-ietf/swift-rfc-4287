@@ -184,7 +184,11 @@ extension RFC_4287.Link.Relation: Codable {
             throw error
         } catch {
             throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "\(error)", underlyingError: error)
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "\(error)",
+                    underlyingError: error
+                )
             )
         }
     }
@@ -199,7 +203,12 @@ extension RFC_4287.Link.Relation: Codable {
             throw error
         } catch {
             throw EncodingError.invalidValue(
-                self, EncodingError.Context(codingPath: encoder.codingPath, debugDescription: "\(error)", underlyingError: error)
+                self,
+                EncodingError.Context(
+                    codingPath: encoder.codingPath,
+                    debugDescription: "\(error)",
+                    underlyingError: error
+                )
             )
         }
     }
