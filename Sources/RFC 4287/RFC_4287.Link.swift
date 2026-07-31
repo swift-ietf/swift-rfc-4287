@@ -86,7 +86,7 @@ extension RFC_4287 {
         ///   - base: Base IRI for resolving relative references (e.g., URL)
         ///   - lang: Language of the link
         public init(
-            href: any RFC_3987.IRI.Representable,
+            href: some RFC_3987.IRI.Representable,
             rel: Relation? = nil,
             type: String? = nil,
             hreflang: String? = nil,
@@ -171,15 +171,35 @@ extension RFC_4287.Link.Relation {
 }
 
 extension RFC_4287.Link.Relation: Codable {
-    public init(from decoder: any Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let string = try container.decode(String.self)
-        self.init(string)
+    // reason: stdlib protocol witness — Decodable.init(from:) signature mandates the existential shape ([API-ERR-006] exception).
+    // swiftlint:disable:next no_any_protocol_existential
+    public init(from decoder: any Decoder) throws(DecodingError) {
+        do {
+            let container = try decoder.singleValueContainer()
+            let string = try container.decode(String.self)
+            self.init(string)
+        } catch let error as DecodingError {
+            throw error
+        } catch {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "\(error)", underlyingError: error)
+            )
+        }
     }
 
-    public func encode(to encoder: any Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(value)
+    // reason: stdlib protocol witness — Encodable.encode(to:) signature mandates the existential shape ([API-ERR-006] exception).
+    // swiftlint:disable:next no_any_protocol_existential
+    public func encode(to encoder: any Encoder) throws(EncodingError) {
+        do {
+            var container = encoder.singleValueContainer()
+            try container.encode(value)
+        } catch let error as EncodingError {
+            throw error
+        } catch {
+            throw EncodingError.invalidValue(
+                self, EncodingError.Context(codingPath: encoder.codingPath, debugDescription: "\(error)", underlyingError: error)
+            )
+        }
     }
 }
 

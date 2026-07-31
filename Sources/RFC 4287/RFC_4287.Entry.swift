@@ -109,7 +109,7 @@ extension RFC_4287.Entry {
         // RFC 4287 Section 4.2.13: Summary is REQUIRED when:
         // 1. Content has src attribute (out-of-line content), OR
         // 2. Content is base64-encoded (binary MIME type)
-        if let content = content {
+        if let content {
             let summaryRequired = content.src != nil || content.requiresBase64Encoding
             if summaryRequired && summary == nil {
                 throw Error.blank
@@ -154,7 +154,7 @@ extension RFC_4287.Entry {
     ///
     /// - Returns: A validated entry, or nil if validation fails
     public init?(
-        id: any RFC_3987.IRI.Representable,
+        id: some RFC_3987.IRI.Representable,
         title: RFC_4287.Title,
         updated: RFC_3339.DateTime,
         authors: [RFC_4287.Author] = [],

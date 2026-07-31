@@ -23,10 +23,20 @@ extension RFC_4287 {
 
             // MARK: - Codable
 
-            public init(from decoder: any Decoder) throws {
-                let container = try decoder.singleValueContainer()
-                let string = try container.decode(String.self)
-                self.init(stringValue: string)
+            // reason: stdlib protocol witness — Decodable.init(from:) signature mandates the existential shape ([API-ERR-006] exception).
+            // swiftlint:disable:next no_any_protocol_existential
+            public init(from decoder: any Decoder) throws(DecodingError) {
+                do {
+                    let container = try decoder.singleValueContainer()
+                    let string = try container.decode(String.self)
+                    self.init(stringValue: string)
+                } catch let error as DecodingError {
+                    throw error
+                } catch {
+                    throw DecodingError.dataCorrupted(
+                        DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "\(error)", underlyingError: error)
+                    )
+                }
             }
         }
 
@@ -123,7 +133,7 @@ extension RFC_4287 {
         ///   - base: Base IRI for resolving relative references (e.g., URL)
         ///   - lang: Language of the content
         public init(
-            src: any RFC_3987.IRI.Representable,
+            src: some RFC_3987.IRI.Representable,
             type: ContentType = .text,
             base: (any RFC_3987.IRI.Representable)? = nil,
             lang: String? = nil
@@ -143,9 +153,19 @@ extension RFC_4287.Content.ContentType {
         }
     }
 
-    public func encode(to encoder: any Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(stringValue)
+    // reason: stdlib protocol witness — Encodable.encode(to:) signature mandates the existential shape ([API-ERR-006] exception).
+    // swiftlint:disable:next no_any_protocol_existential
+    public func encode(to encoder: any Encoder) throws(EncodingError) {
+        do {
+            var container = encoder.singleValueContainer()
+            try container.encode(stringValue)
+        } catch let error as EncodingError {
+            throw error
+        } catch {
+            throw EncodingError.invalidValue(
+                self, EncodingError.Context(codingPath: encoder.codingPath, debugDescription: "\(error)", underlyingError: error)
+            )
+        }
     }
 }
 

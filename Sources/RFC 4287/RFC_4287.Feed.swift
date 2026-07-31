@@ -155,7 +155,7 @@ extension RFC_4287.Feed {
     ///
     /// - Returns: A validated feed, or nil if validation fails
     public init?(
-        id: any RFC_3987.IRI.Representable,
+        id: some RFC_3987.IRI.Representable,
         title: RFC_4287.Title,
         updated: RFC_3339.DateTime,
         authors: [RFC_4287.Author] = [],
