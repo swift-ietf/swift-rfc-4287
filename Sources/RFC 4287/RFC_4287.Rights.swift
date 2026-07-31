@@ -31,6 +31,8 @@ extension RFC_4287 {
         public init(
             _ value: String,
             type: Text.ContentType = .text,
+            // REASON: nil-defaulted optional existential parameter; no lawful generic spelling (T? = nil defeats inference); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+            // swiftlint:disable:next no_any_protocol_existential
             base: (any RFC_3987.IRI.Representable)? = nil,
             lang: String? = nil
         ) {

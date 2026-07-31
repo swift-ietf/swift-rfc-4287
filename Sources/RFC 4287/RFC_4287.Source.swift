@@ -124,14 +124,22 @@ extension RFC_4287 {
             categories: [Category] = [],
             contributors: [Contributor] = [],
             generator: Generator? = nil,
+            // REASON: nil-defaulted optional existential parameter; no lawful generic spelling (T? = nil defeats inference); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+            // swiftlint:disable:next no_any_protocol_existential
             icon: (any RFC_3987.IRI.Representable)? = nil,
+            // REASON: nil-defaulted optional existential parameter; no lawful generic spelling (T? = nil defeats inference); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+            // swiftlint:disable:next no_any_protocol_existential
             id: (any RFC_3987.IRI.Representable)? = nil,
             links: [Link] = [],
+            // REASON: nil-defaulted optional existential parameter; no lawful generic spelling (T? = nil defeats inference); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+            // swiftlint:disable:next no_any_protocol_existential
             logo: (any RFC_3987.IRI.Representable)? = nil,
             rights: Rights? = nil,
             subtitle: Subtitle? = nil,
             title: Title? = nil,
             updated: RFC_3339.DateTime? = nil,
+            // REASON: nil-defaulted optional existential parameter; no lawful generic spelling (T? = nil defeats inference); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+            // swiftlint:disable:next no_any_protocol_existential
             base: (any RFC_3987.IRI.Representable)? = nil,
             lang: String? = nil
         ) {

@@ -37,8 +37,12 @@ extension RFC_4287.Contributor {
     ///   - lang: Language of the content
     public init(
         name: String,
+        // REASON: nil-defaulted optional existential parameter; no lawful generic spelling (T? = nil defeats inference); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+        // swiftlint:disable:next no_any_protocol_existential
         uri: (any RFC_3987.IRI.Representable)? = nil,
         email: RFC_2822.AddrSpec? = nil,
+        // REASON: nil-defaulted optional existential parameter; no lawful generic spelling (T? = nil defeats inference); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+        // swiftlint:disable:next no_any_protocol_existential
         base: (any RFC_3987.IRI.Representable)? = nil,
         lang: String? = nil
     ) {

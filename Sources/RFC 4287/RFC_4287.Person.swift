@@ -76,6 +76,8 @@ extension RFC_4287.Person {
         name: String,
         uri: (any RFC_3987.IRI.Representable)?,
         email: RFC_2822.AddrSpec? = nil,
+        // REASON: nil-defaulted optional existential parameter; no lawful generic spelling (T? = nil defeats inference); rule-scope refinement tracked at swift-foundations/swift-linter-rules#4
+        // swiftlint:disable:next no_any_protocol_existential
         base: (any RFC_3987.IRI.Representable)? = nil,
         lang: String? = nil
     ) {
