@@ -1,6 +1,5 @@
 import RFC_3987
 
-
 extension RFC_4287.Link {
     /// Link relation types as defined in RFC 4287 and extensions
     ///

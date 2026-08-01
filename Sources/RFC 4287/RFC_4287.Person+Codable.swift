@@ -1,5 +1,5 @@
-import RFC_3987
 import RFC_2822
+import RFC_3987
 
 // MARK: - Codable
 extension RFC_4287.Person: Codable {
