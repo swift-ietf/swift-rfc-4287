@@ -4,7 +4,13 @@ import Testing
 
 @Suite
 struct `Ergonomic Improvements Tests` {
-    @Test func categoryExpressibleByStringLiteral() async throws {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Ergonomic Improvements Tests`.Unit {
+    @Test func `category expressible by string literal`() async throws {
         let category: RFC_4287.Category = "Technology"
         #expect(category.term == "Technology")
         #expect(category.scheme == nil)
@@ -18,7 +24,7 @@ struct `Ergonomic Improvements Tests` {
         #expect(categories[2].term == "Politics")
     }
 
-    @Test func personExpressibleByStringLiteral() async throws {
+    @Test func `person expressible by string literal`() async throws {
         let person: RFC_4287.Person = "John Doe"
         #expect(person.name == "John Doe")
         #expect(person.uri == nil)
@@ -32,7 +38,7 @@ struct `Ergonomic Improvements Tests` {
         #expect(authors[2].name == "Carol")
     }
 
-    @Test func linkExpressibleByStringLiteral() async throws {
+    @Test func `link expressible by string literal`() async throws {
         let link: RFC_4287.Link = try .init(href: .init("https://example.com/post"))
         #expect(link.href == "https://example.com/post")
         #expect(link.rel == nil)

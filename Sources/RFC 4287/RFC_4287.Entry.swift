@@ -57,12 +57,6 @@ extension RFC_4287 {
 }
 
 extension RFC_4287.Entry {
-    public enum Error: Swift.Error {
-        case blank
-    }
-}
-
-extension RFC_4287.Entry {
     /// Creates a new entry with validation
     ///
     /// - Parameters:

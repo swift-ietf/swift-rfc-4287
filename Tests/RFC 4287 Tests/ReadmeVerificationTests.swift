@@ -4,14 +4,19 @@ import Testing
 @testable import RFC_4287
 
 // Helper to create current date-time
-private func currentDateTime() throws -> RFC_3339.DateTime {
+private func currentDateTime() throws(Time.Error) -> RFC_3339.DateTime {
     let time = try Time(year: 2024, month: 11, day: 27, hour: 12, minute: 0, second: 0)
     return RFC_3339.DateTime(time: time, offset: .utc)
 }
 
 @Suite
 struct `README Verification` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
 
+extension `README Verification`.Unit {
     @Test
     func `String literal feed creation (README line 64-68)`() throws {
         // String literals (recommended - clean and simple)

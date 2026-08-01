@@ -5,7 +5,13 @@ import Testing
 
 @Suite
 struct `RFC 3339 DateTime Tests` {
-    @Test func createDateTimeFromComponents() async throws {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `RFC 3339 DateTime Tests`.Unit {
+    @Test func `create date time from components`() async throws {
         let time = try Time(year: 2021, month: 1, day: 1, hour: 0, minute: 0, second: 0)
         let dateTime = RFC_3339.DateTime(time: time, offset: .utc)
 
@@ -15,7 +21,7 @@ struct `RFC 3339 DateTime Tests` {
         #expect(dateTime.offset == RFC_3339.Offset.utc)
     }
 
-    @Test func parseRFC3339String() async throws {
+    @Test func `parse RFC 3339 string`() async throws {
         let dateString = "2021-01-01T00:00:00Z"
         let dateTime = try RFC_3339.DateTime(dateString)
 
@@ -25,7 +31,7 @@ struct `RFC 3339 DateTime Tests` {
         #expect(dateTime.offset == RFC_3339.Offset.utc)
     }
 
-    @Test func formatRFC3339String() async throws {
+    @Test func `format RFC 3339 string`() async throws {
         let time = try Time(year: 2021, month: 1, day: 1, hour: 12, minute: 30, second: 45)
         let dateTime = RFC_3339.DateTime(time: time, offset: .utc)
 
@@ -37,7 +43,7 @@ struct `RFC 3339 DateTime Tests` {
         #expect(formatted.contains("12:30:45"))
     }
 
-    @Test func roundTripDateTimeFormatting() async throws {
+    @Test func `round trip date time formatting`() async throws {
         let time = try Time(year: 2021, month: 6, day: 15, hour: 14, minute: 30, second: 0)
         let original = RFC_3339.DateTime(time: time, offset: .utc)
 
@@ -51,7 +57,7 @@ struct `RFC 3339 DateTime Tests` {
         #expect(parsed.time.minute == original.time.minute)
     }
 
-    @Test func variousRFC3339Formats() async throws {
+    @Test func `various RFC 3339 formats`() async throws {
         let formats = [
             "2021-01-01T00:00:00Z",
             "2021-01-01T00:00:00.000Z",

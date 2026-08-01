@@ -11,37 +11,6 @@ extension RFC_4287 {
             case html
             case xhtml
             case media(String)  // e.g., "image/png", "application/pdf"
-
-            public init(stringValue: String) {
-                switch stringValue {
-                case "text": self = .text
-                case "html": self = .html
-                case "xhtml": self = .xhtml
-                default: self = .media(stringValue)
-                }
-            }
-
-            // MARK: - Codable
-
-            // reason: stdlib protocol witness — Decodable.init(from:) signature mandates the existential shape ([API-ERR-006] exception).
-            // swiftlint:disable:next no_any_protocol_existential
-            public init(from decoder: any Decoder) throws(DecodingError) {
-                do {
-                    let container = try decoder.singleValueContainer()
-                    let string = try container.decode(String.self)
-                    self.init(stringValue: string)
-                } catch let error as DecodingError {
-                    throw error
-                } catch {
-                    throw DecodingError.dataCorrupted(
-                        DecodingError.Context(
-                            codingPath: decoder.codingPath,
-                            debugDescription: "\(error)",
-                            underlyingError: error
-                        )
-                    )
-                }
-            }
         }
 
         /// The type of this content
@@ -154,6 +123,41 @@ extension RFC_4287 {
 }
 
 extension RFC_4287.Content.ContentType {
+    public init(stringValue: String) {
+        switch stringValue {
+        case "text": self = .text
+        case "html": self = .html
+        case "xhtml": self = .xhtml
+        default: self = .media(stringValue)
+        }
+    }
+
+    // MARK: - Codable
+
+    // reason: stdlib protocol witness — Decodable.init(from:) signature mandates the existential shape ([API-ERR-006] exception).
+    // swiftlint:disable:next no_any_protocol_existential
+    public init(from decoder: any Decoder) throws(DecodingError) {
+        // swift-linter:disable:next do throws for typed catch
+        // REASON: Decoder.singleValueContainer()/decode(_:) are untyped `throws` stdlib protocol requirements; no typed `E` exists to name.
+        do {
+            let container = try decoder.singleValueContainer()
+            let string = try container.decode(String.self)
+            self.init(stringValue: string)
+        } catch let error as DecodingError {
+            throw error
+        } catch {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "\(error)",
+                    underlyingError: error
+                )
+            )
+        }
+    }
+}
+
+extension RFC_4287.Content.ContentType {
     public var stringValue: String {
         switch self {
         case .text: return "text"
@@ -166,6 +170,8 @@ extension RFC_4287.Content.ContentType {
     // reason: stdlib protocol witness — Encodable.encode(to:) signature mandates the existential shape ([API-ERR-006] exception).
     // swiftlint:disable:next no_any_protocol_existential
     public func encode(to encoder: any Encoder) throws(EncodingError) {
+        // swift-linter:disable:next do throws for typed catch
+        // REASON: SingleValueEncodingContainer.encode(_:) is an untyped `throws` stdlib protocol requirement; no typed `E` exists to name.
         do {
             var container = encoder.singleValueContainer()
             try container.encode(stringValue)

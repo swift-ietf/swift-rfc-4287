@@ -64,11 +64,6 @@ extension RFC_4287 {
 }
 
 extension RFC_4287.Feed {
-    public enum Error: Swift.Error {
-        case blank
-    }
-}
-extension RFC_4287.Feed {
 
     /// Creates a new feed with validation
     ///

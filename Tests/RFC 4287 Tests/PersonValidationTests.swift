@@ -6,7 +6,12 @@ import Testing
 
 @Suite
 struct `Person Email Validation` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
 
+extension `Person Email Validation`.Unit {
     @Test
     func `Person with valid email succeeds`() throws {
         let email = try RFC_2822.AddrSpec(ascii: "john@example.com".utf8.map { Byte($0) })
@@ -82,7 +87,12 @@ struct `Person Email Validation` {
 
 @Suite
 struct `Person Codable with Email` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
 
+extension `Person Codable with Email`.Unit {
     @Test
     func `Encode Person with email`() throws {
         let email = try RFC_2822.AddrSpec(ascii: "test@example.com".utf8.map { Byte($0) })
@@ -153,7 +163,12 @@ struct `Person Codable with Email` {
 
 @Suite
 struct `Person IRI.Representable Integration` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
 
+extension `Person IRI.Representable Integration`.Unit {
     @Test
     func `Person with IRI from string literal`() throws {
         let iri: RFC_3987.IRI = "https://example.com/~user"
