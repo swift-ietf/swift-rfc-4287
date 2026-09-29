@@ -21,6 +21,7 @@ let package = Package(
         .package(url: "https://github.com/swift-ietf/swift-rfc-3339.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-3987.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-4648.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-binary.git", branch: "main", traits: ["Serializer"]),
     ],
     targets: [
         .target(
@@ -30,7 +31,8 @@ let package = Package(
         .testTarget(
             name: "RFC 4287 Tests",
             dependencies: [
-                .target(name: "RFC 4287")
+                .target(name: "RFC 4287"),
+                .product(name: "Binary", package: "swift-binary"),
             ]
         ),
     ],
