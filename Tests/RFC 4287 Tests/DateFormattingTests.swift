@@ -12,7 +12,7 @@ struct `RFC 3339 DateTime Tests` {
 
 extension `RFC 3339 DateTime Tests`.Unit {
     @Test func `create date time from components`() async throws {
-        let time = try Time(year: 2021, month: 1, day: 1, hour: 0, minute: 0, second: 0)
+        let time = try Gregorian.DateTime(year: 2021, month: 1, day: 1, hour: 0, minute: 0, second: 0)
         let dateTime = RFC_3339.DateTime(time: time, offset: .utc)
 
         #expect(dateTime.time.year == 2021)
@@ -32,7 +32,7 @@ extension `RFC 3339 DateTime Tests`.Unit {
     }
 
     @Test func `format RFC 3339 string`() async throws {
-        let time = try Time(year: 2021, month: 1, day: 1, hour: 12, minute: 30, second: 45)
+        let time = try Gregorian.DateTime(year: 2021, month: 1, day: 1, hour: 12, minute: 30, second: 45)
         let dateTime = RFC_3339.DateTime(time: time, offset: .utc)
 
         let formatted = String(dateTime)
@@ -43,7 +43,7 @@ extension `RFC 3339 DateTime Tests`.Unit {
     }
 
     @Test func `round trip date time formatting`() async throws {
-        let time = try Time(year: 2021, month: 6, day: 15, hour: 14, minute: 30, second: 0)
+        let time = try Gregorian.DateTime(year: 2021, month: 6, day: 15, hour: 14, minute: 30, second: 0)
         let original = RFC_3339.DateTime(time: time, offset: .utc)
 
         let formatted = String(original)

@@ -3,8 +3,8 @@ import Testing
 
 @testable import RFC_4287
 
-private func currentDateTime() throws(Time.Error) -> RFC_3339.DateTime {
-    let time = try Time(year: 2024, month: 11, day: 27, hour: 12, minute: 0, second: 0)
+private func currentDateTime() throws(Gregorian.DateTime.Error) -> RFC_3339.DateTime {
+    let time = try Gregorian.DateTime(year: 2024, month: 11, day: 27, hour: 12, minute: 0, second: 0)
     return RFC_3339.DateTime(time: time, offset: .utc)
 }
 
