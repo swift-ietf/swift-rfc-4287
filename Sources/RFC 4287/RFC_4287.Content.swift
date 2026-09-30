@@ -141,11 +141,13 @@ extension RFC_4287.Content {
             return false
         }
 
-        if mediaType.hasSuffix("/xml") || mediaType.hasSuffix("+xml") {
+        let lowercased = mediaType.lowercased()
+
+        if lowercased.hasSuffix("/xml") || lowercased.hasSuffix("+xml") {
             return false
         }
 
-        if mediaType.hasPrefix("text/") {
+        if lowercased.hasPrefix("text/") {
             return false
         }
 
