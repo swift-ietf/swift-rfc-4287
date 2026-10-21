@@ -27,7 +27,10 @@ let package = Package(
     targets: [
         .target(
             name: "RFC 4287",
-            dependencies: [.product(name: "RFC 2822", package: "swift-rfc-2822"), .product(name: "RFC 3339", package: "swift-rfc-3339"), .product(name: "RFC 3987", package: "swift-rfc-3987"), .product(name: "RFC 4648", package: "swift-rfc-4648")]
+            dependencies: [
+                .product(name: "RFC 2822", package: "swift-rfc-2822"), .product(name: "RFC 3339", package: "swift-rfc-3339"), .product(name: "RFC 3987", package: "swift-rfc-3987"),
+                .product(name: "RFC 4648", package: "swift-rfc-4648"),
+            ]
         ),
         .testTarget(
             name: "RFC 4287 Tests",
@@ -41,14 +44,15 @@ let package = Package(
 )
 
 for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    target.swiftSettings = (target.swiftSettings ?? []) + [
-        .strictMemorySafety(),
-        .enableUpcomingFeature("ExistentialAny"),
-        .enableUpcomingFeature("InternalImportsByDefault"),
-        .enableUpcomingFeature("MemberImportVisibility"),
-        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-        .enableUpcomingFeature("InferIsolatedConformances"),
-        .enableExperimentalFeature("Lifetimes"),
-        .treatAllWarnings(as: .error),
-    ]
+    target.swiftSettings =
+        (target.swiftSettings ?? []) + [
+            .strictMemorySafety(),
+            .enableUpcomingFeature("ExistentialAny"),
+            .enableUpcomingFeature("InternalImportsByDefault"),
+            .enableUpcomingFeature("MemberImportVisibility"),
+            .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+            .enableUpcomingFeature("InferIsolatedConformances"),
+            .enableExperimentalFeature("Lifetimes"),
+            .treatAllWarnings(as: .error),
+        ]
 }
