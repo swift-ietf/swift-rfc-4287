@@ -1,4 +1,5 @@
 import RFC_3987
+public import RFC_5646
 
 extension RFC_4287 {
 
@@ -12,14 +13,14 @@ extension RFC_4287 {
 
         public let base: RFC_3987.IRI?
 
-        public let lang: String?
+        public let lang: RFC_5646.LanguageTag?
 
         public init(
             term: String,
             scheme: RFC_3987.IRI? = nil,
             label: String? = nil,
             base: RFC_3987.IRI? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.term = term
             self.scheme = scheme
@@ -40,7 +41,7 @@ extension RFC_4287.Category {
         label: String? = nil,
 
         base: (any RFC_3987.IRI.Representable)? = nil,
-        lang: String? = nil
+        lang: RFC_5646.LanguageTag? = nil
     ) {
         self.init(term: term, scheme: scheme?.iri, label: label, base: base?.iri, lang: lang)
     }

@@ -1,5 +1,6 @@
 import RFC_2822
 import RFC_3987
+import RFC_5646
 
 extension RFC_4287.Person: Codable {
     enum CodingKeys: String, CodingKey {
@@ -40,7 +41,7 @@ extension RFC_4287.Person: Codable {
             } else {
                 base = nil
             }
-            lang = try container.decodeIfPresent(String.self, forKey: .lang)
+            lang = try container.decodeIfPresent(RFC_5646.LanguageTag.self, forKey: .lang)
         } catch let error as DecodingError {
             throw error
         } catch {

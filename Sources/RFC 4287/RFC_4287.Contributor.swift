@@ -1,5 +1,6 @@
 public import RFC_2822
 public import RFC_3987
+public import RFC_5646
 
 extension RFC_4287 {
 
@@ -22,7 +23,7 @@ extension RFC_4287.Contributor {
         email: RFC_2822.AddrSpec? = nil,
 
         base: (any RFC_3987.IRI.Representable)? = nil,
-        lang: String? = nil
+        lang: RFC_5646.LanguageTag? = nil
     ) {
         self.person = .init(
             name: name,
@@ -44,7 +45,7 @@ extension RFC_4287.Contributor {
 
     public var base: RFC_3987.IRI? { person.base }
 
-    public var lang: String? { person.lang }
+    public var lang: RFC_5646.LanguageTag? { person.lang }
 }
 
 extension RFC_4287.Contributor: ExpressibleByStringLiteral {

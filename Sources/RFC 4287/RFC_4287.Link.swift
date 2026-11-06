@@ -1,4 +1,5 @@
 import RFC_3987
+public import RFC_5646
 
 extension RFC_4287 {
 
@@ -18,7 +19,7 @@ extension RFC_4287 {
 
         public let base: RFC_3987.IRI?
 
-        public let lang: String?
+        public let lang: RFC_5646.LanguageTag?
 
         public init(
             href: RFC_3987.IRI,
@@ -28,7 +29,7 @@ extension RFC_4287 {
             title: String? = nil,
             length: Int? = nil,
             base: RFC_3987.IRI? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.href = href
             self.rel = rel
@@ -49,7 +50,7 @@ extension RFC_4287 {
             length: Int? = nil,
 
             base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.init(
                 href: href.iri,

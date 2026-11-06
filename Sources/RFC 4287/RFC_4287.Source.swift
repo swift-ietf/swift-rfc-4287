@@ -1,4 +1,5 @@
 import RFC_3987
+public import RFC_5646
 
 extension RFC_4287 {
 
@@ -30,7 +31,7 @@ extension RFC_4287 {
 
         public let base: RFC_3987.IRI?
 
-        public let lang: String?
+        public let lang: RFC_5646.LanguageTag?
 
         public init(
             authors: [Author] = [],
@@ -46,7 +47,7 @@ extension RFC_4287 {
             title: Title? = nil,
             updated: RFC_3339.DateTime? = nil,
             base: RFC_3987.IRI? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.authors = authors
             self.categories = categories
@@ -82,7 +83,7 @@ extension RFC_4287 {
             updated: RFC_3339.DateTime? = nil,
 
             base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.init(
                 authors: authors,

@@ -1,4 +1,5 @@
 import RFC_3987
+public import RFC_5646
 
 extension RFC_4287 {
 
@@ -10,14 +11,14 @@ extension RFC_4287 {
 
         public let base: RFC_3987.IRI?
 
-        public let lang: String?
+        public let lang: RFC_5646.LanguageTag?
 
         public init(
             _ value: String,
             type: RFC_4287.Text.ContentType = .text,
 
             base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.value = value
             self.type = type

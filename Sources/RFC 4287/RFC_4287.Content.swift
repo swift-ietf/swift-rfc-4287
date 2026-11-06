@@ -1,4 +1,6 @@
 import RFC_3987
+public import RFC_5646
+public import RFC_9110
 
 extension RFC_4287 {
 
@@ -8,7 +10,7 @@ extension RFC_4287 {
             case text
             case html
             case xhtml
-            case media(String)
+            case media(RFC_9110.MediaType)
         }
 
         public let type: ContentType
@@ -19,14 +21,14 @@ extension RFC_4287 {
 
         public let base: RFC_3987.IRI?
 
-        public let lang: String?
+        public let lang: RFC_5646.LanguageTag?
 
         public init(
             value: String,
             type: ContentType = .text,
 
             base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.value = value
             self.type = type
@@ -37,10 +39,10 @@ extension RFC_4287 {
 
         public init(
             rawBytes: [UInt8],
-            mediaType: String,
+            mediaType: RFC_9110.MediaType,
 
             base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.value = rawBytes.map { Byte($0) }.base64()
             self.type = .media(mediaType)
@@ -53,7 +55,7 @@ extension RFC_4287 {
             src: RFC_3987.IRI,
             type: ContentType = .text,
             base: RFC_3987.IRI? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.value = nil
             self.type = type
@@ -67,7 +69,7 @@ extension RFC_4287 {
             type: ContentType = .text,
 
             base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.init(src: src.iri, type: type, base: base?.iri, lang: lang)
         }
@@ -80,7 +82,7 @@ extension RFC_4287.Content.ContentType {
         case "text": self = .text
         case "html": self = .html
         case "xhtml": self = .xhtml
-        default: self = .media(stringValue)
+        default: self = RFC_9110.MediaType(parsing: stringValue).map(Self.media) ?? .text
         }
     }
 
@@ -110,7 +112,7 @@ extension RFC_4287.Content.ContentType {
         case .text: return "text"
         case .html: return "html"
         case .xhtml: return "xhtml"
-        case .media(let type): return type
+        case .media(let type): return type.value
         }
     }
 
@@ -141,13 +143,11 @@ extension RFC_4287.Content {
             return false
         }
 
-        let lowercased = mediaType.lowercased()
-
-        if lowercased.hasSuffix("/xml") || lowercased.hasSuffix("+xml") {
+        if mediaType.subtype == "xml" || mediaType.subtype.hasSuffix("+xml") {
             return false
         }
 
-        if lowercased.hasPrefix("text/") {
+        if mediaType.type == "text" {
             return false
         }
 

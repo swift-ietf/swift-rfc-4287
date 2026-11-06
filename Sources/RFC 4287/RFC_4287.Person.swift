@@ -1,5 +1,6 @@
 public import RFC_2822
 import RFC_3987
+public import RFC_5646
 
 extension RFC_4287 {
 
@@ -13,14 +14,14 @@ extension RFC_4287 {
 
         public let base: RFC_3987.IRI?
 
-        public let lang: String?
+        public let lang: RFC_5646.LanguageTag?
 
         public init(
             name: String,
             uri: RFC_3987.IRI? = nil,
             email: RFC_2822.AddrSpec? = nil,
             base: RFC_3987.IRI? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.name = name
             self.uri = uri
@@ -40,7 +41,7 @@ extension RFC_4287.Person {
         email: RFC_2822.AddrSpec? = nil,
 
         base: (any RFC_3987.IRI.Representable)? = nil,
-        lang: String? = nil
+        lang: RFC_5646.LanguageTag? = nil
     ) {
         self.init(name: name, uri: uri?.iri, email: email, base: base?.iri, lang: lang)
     }

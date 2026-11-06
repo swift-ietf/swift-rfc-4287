@@ -1,3 +1,5 @@
+public import RFC_5646
+
 extension RFC_4287 {
 
     public struct Subtitle: Hashable, Sendable, Codable {
@@ -13,7 +15,7 @@ extension RFC_4287 {
             type: Text.ContentType = .text,
 
             base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: String? = nil
+            lang: RFC_5646.LanguageTag? = nil
         ) {
             self.text = Text(value, type: type, base: base, lang: lang)
         }
@@ -28,7 +30,7 @@ extension RFC_4287.Subtitle {
 
     public var base: RFC_3987.IRI? { text.base }
 
-    public var lang: String? { text.lang }
+    public var lang: RFC_5646.LanguageTag? { text.lang }
 }
 
 extension RFC_4287.Subtitle: ExpressibleByStringLiteral {
