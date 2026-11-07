@@ -4,14 +4,18 @@ import Testing
 
 @testable import RFC_4287
 
-@Suite
-struct `Person Email Validation` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+enum `PersonValidation Tests` {}
+
+extension `PersonValidation Tests` {
+    @Suite
+    struct `Person Email Validation` {
+        @Suite struct Unit {}
+        @Suite struct `Edge Case` {}
+        @Suite struct Integration {}
+    }
 }
 
-extension `Person Email Validation`.Unit {
+extension `PersonValidation Tests`.`Person Email Validation`.Unit {
     @Test
     func `Person with valid email succeeds`() throws {
         let email = try RFC_2822.AddrSpec(ascii: "john@example.com".utf8.map { Byte($0) })
@@ -85,14 +89,16 @@ extension `Person Email Validation`.Unit {
     }
 }
 
-@Suite
-struct `Person Codable with Email` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+extension `PersonValidation Tests` {
+    @Suite
+    struct `Person Codable with Email` {
+        @Suite struct Unit {}
+        @Suite struct `Edge Case` {}
+        @Suite struct Integration {}
+    }
 }
 
-extension `Person Codable with Email`.Unit {
+extension `PersonValidation Tests`.`Person Codable with Email`.Unit {
     @Test
     func `Encode Person with email`() throws {
         let email = try RFC_2822.AddrSpec(ascii: "test@example.com".utf8.map { Byte($0) })
@@ -161,14 +167,16 @@ extension `Person Codable with Email`.Unit {
     }
 }
 
-@Suite
-struct `Person IRI.Representable Integration` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+extension `PersonValidation Tests` {
+    @Suite
+    struct `Person IRI.Representable Integration` {
+        @Suite struct Unit {}
+        @Suite struct `Edge Case` {}
+        @Suite struct Integration {}
+    }
 }
 
-extension `Person IRI.Representable Integration`.Unit {
+extension `PersonValidation Tests`.`Person IRI.Representable Integration`.Unit {
     @Test
     func `Person with IRI from string literal`() throws {
         let iri: RFC_3987.IRI = "https://example.com/~user"

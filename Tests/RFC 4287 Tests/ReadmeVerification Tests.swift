@@ -8,14 +8,18 @@ private func currentDateTime() throws(Gregorian.DateTime.Error) -> RFC_3339.Date
     return RFC_3339.DateTime(time: time, offset: .utc)
 }
 
-@Suite
-struct `README Verification` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+enum `ReadmeVerification Tests` {}
+
+extension `ReadmeVerification Tests` {
+    @Suite
+    struct `README Verification` {
+        @Suite struct Unit {}
+        @Suite struct `Edge Case` {}
+        @Suite struct Integration {}
+    }
 }
 
-extension `README Verification`.Unit {
+extension `ReadmeVerification Tests`.`README Verification`.Unit {
     @Test
     func `String literal feed creation (README line 64-68)`() throws {
 

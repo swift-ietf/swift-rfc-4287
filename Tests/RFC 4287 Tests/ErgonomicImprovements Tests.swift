@@ -2,14 +2,18 @@ import Testing
 
 @testable import RFC_4287
 
-@Suite
-struct `Ergonomic Improvements Tests` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+enum `ErgonomicImprovements Tests` {}
+
+extension `ErgonomicImprovements Tests` {
+    @Suite
+    struct `Ergonomic Improvements Tests` {
+        @Suite struct Unit {}
+        @Suite struct `Edge Case` {}
+        @Suite struct Integration {}
+    }
 }
 
-extension `Ergonomic Improvements Tests`.Unit {
+extension `ErgonomicImprovements Tests`.`Ergonomic Improvements Tests`.Unit {
     @Test func `category expressible by string literal`() async throws {
         let category: RFC_4287.Category = "Technology"
         #expect(category.term == "Technology")
