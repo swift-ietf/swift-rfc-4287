@@ -3,7 +3,16 @@ public import RFC_5646
 public import RFC_9110
 
 extension RFC_4287 {
+
     public struct Content: Hashable, Sendable, Codable {
+
+        public enum ContentType: Hashable, Sendable, Codable {
+            case text
+            case html
+            case xhtml
+            case media(RFC_9110.MediaType)
+        }
+
         public let type: ContentType
 
         public let value: String?
@@ -67,15 +76,6 @@ extension RFC_4287 {
     }
 }
 
-extension RFC_4287.Content {
-    public enum ContentType: Hashable, Sendable, Codable {
-        case text
-        case html
-        case xhtml
-        case media(RFC_9110.MediaType)
-    }
-}
-
 extension RFC_4287.Content.ContentType {
     public init(stringValue: String) {
         switch stringValue {
@@ -87,6 +87,7 @@ extension RFC_4287.Content.ContentType {
     }
 
     public init(from decoder: any Decoder) throws(DecodingError) {
+
         do {
             let container = try decoder.singleValueContainer()
             let string = try container.decode(String.self)
@@ -116,6 +117,7 @@ extension RFC_4287.Content.ContentType {
     }
 
     public func encode(to encoder: any Encoder) throws(EncodingError) {
+
         do {
             var container = encoder.singleValueContainer()
             try container.encode(stringValue)
@@ -135,6 +137,7 @@ extension RFC_4287.Content.ContentType {
 }
 
 extension RFC_4287.Content {
+
     public var requiresBase64Encoding: Bool {
         guard case .media(let mediaType) = type else {
             return false
