@@ -68,12 +68,6 @@ extension RFC_4287 {
 }
 
 extension RFC_4287.Content {
-    public enum ContentType: Hashable, Sendable, Codable {
-        case text
-        case html
-        case xhtml
-        case media(RFC_9110.MediaType)
-    }
 }
 
 extension RFC_4287.Content.ContentType {
