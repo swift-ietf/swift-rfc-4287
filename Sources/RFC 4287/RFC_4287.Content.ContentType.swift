@@ -1,5 +1,5 @@
 import RFC_3987
-public import RFC_5646
+import RFC_5646
 public import RFC_9110
 
 
