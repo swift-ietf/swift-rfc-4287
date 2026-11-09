@@ -15,6 +15,10 @@ let package = Package(
         .library(
             name: "RFC 4287",
             targets: ["RFC 4287"]
+        ),
+        .library(
+            name: "RFC 4287 XML",
+            targets: ["RFC 4287 XML"]
         )
     ],
     dependencies: [
@@ -25,6 +29,7 @@ let package = Package(
         .package(url: "https://github.com/swift-ietf/swift-rfc-5646.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-9110.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-binary.git", branch: "main", traits: ["Serializer"]),
+        .package(url: "https://github.com/swift-w3c/swift-w3c-xml.git", branch: "main"),
     ],
     targets: [
         .target(
@@ -34,6 +39,28 @@ let package = Package(
                 .product(name: "RFC 4648", package: "swift-rfc-4648"),
                 .product(name: "RFC 5646", package: "swift-rfc-5646"),
                 .product(name: "RFC 9110", package: "swift-rfc-9110"),
+            ]
+        ),
+        .target(
+            name: "RFC 4287 XML",
+            dependencies: [
+                .target(name: "RFC 4287"),
+                .product(name: "W3C XML", package: "swift-w3c-xml"),
+                .product(name: "RFC 2822", package: "swift-rfc-2822"),
+                .product(name: "RFC 3339", package: "swift-rfc-3339"),
+                .product(name: "RFC 3987", package: "swift-rfc-3987"),
+                .product(name: "RFC 5646", package: "swift-rfc-5646"),
+                .product(name: "RFC 9110", package: "swift-rfc-9110"),
+            ]
+        ),
+        .testTarget(
+            name: "RFC 4287 XML Tests",
+            dependencies: [
+                .target(name: "RFC 4287"),
+                .target(name: "RFC 4287 XML"),
+                .product(name: "W3C XML", package: "swift-w3c-xml"),
+                .product(name: "RFC 3339", package: "swift-rfc-3339"),
+                .product(name: "RFC 3987", package: "swift-rfc-3987"),
             ]
         ),
         .testTarget(
