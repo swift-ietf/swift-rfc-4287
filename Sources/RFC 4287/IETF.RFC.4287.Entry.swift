@@ -1,7 +1,7 @@
 import RFC_3987
 public import RFC_5646
 
-extension RFC_4287 {
+extension IETF.RFC.`4287` {
 
     public struct Entry: Hashable, Sendable, Codable {
 
@@ -13,13 +13,13 @@ extension RFC_4287 {
 
         public let contributors: [Contributor]
 
-        public let id: RFC_3987.IRI
+        public let id: IETF.RFC.`3987`.IRI
 
         public let links: [Link]
 
-        public let updated: RFC_3339.DateTime
+        public let updated: IETF.RFC.`3339`.DateTime
 
-        public let published: RFC_3339.DateTime?
+        public let published: IETF.RFC.`3339`.DateTime?
 
         public let rights: Rights?
 
@@ -29,29 +29,29 @@ extension RFC_4287 {
 
         public let title: Title
 
-        public let base: RFC_3987.IRI?
+        public let base: IETF.RFC.`3987`.IRI?
 
-        public let lang: RFC_5646.LanguageTag?
+        public let lang: IETF.RFC.`5646`.LanguageTag?
     }
 }
 
-extension RFC_4287.Entry {
+extension IETF.RFC.`4287`.Entry {
 
     public init(
-        id: RFC_3987.IRI,
-        title: RFC_4287.Title,
-        updated: RFC_3339.DateTime,
-        authors: [RFC_4287.Author] = [],
-        content: RFC_4287.Content? = nil,
-        links: [RFC_4287.Link] = [],
-        categories: [RFC_4287.Category] = [],
-        contributors: [RFC_4287.Contributor] = [],
-        published: RFC_3339.DateTime? = nil,
-        rights: RFC_4287.Rights? = nil,
-        source: RFC_4287.Source? = nil,
-        summary: RFC_4287.Summary? = nil,
-        base: RFC_3987.IRI? = nil,
-        lang: RFC_5646.LanguageTag? = nil
+        id: IETF.RFC.`3987`.IRI,
+        title: IETF.RFC.`4287`.Title,
+        updated: IETF.RFC.`3339`.DateTime,
+        authors: [IETF.RFC.`4287`.Author] = [],
+        content: IETF.RFC.`4287`.Content? = nil,
+        links: [IETF.RFC.`4287`.Link] = [],
+        categories: [IETF.RFC.`4287`.Category] = [],
+        contributors: [IETF.RFC.`4287`.Contributor] = [],
+        published: IETF.RFC.`3339`.DateTime? = nil,
+        rights: IETF.RFC.`4287`.Rights? = nil,
+        source: IETF.RFC.`4287`.Source? = nil,
+        summary: IETF.RFC.`4287`.Summary? = nil,
+        base: IETF.RFC.`3987`.IRI? = nil,
+        lang: IETF.RFC.`5646`.LanguageTag? = nil
     ) throws(Error) {
 
         let hasContent = content != nil
@@ -85,21 +85,21 @@ extension RFC_4287.Entry {
     }
 
     public init?(
-        id: some RFC_3987.IRI.Representable,
-        title: RFC_4287.Title,
-        updated: RFC_3339.DateTime,
-        authors: [RFC_4287.Author] = [],
-        content: RFC_4287.Content? = nil,
-        links: [RFC_4287.Link] = [],
-        categories: [RFC_4287.Category] = [],
-        contributors: [RFC_4287.Contributor] = [],
-        published: RFC_3339.DateTime? = nil,
-        rights: RFC_4287.Rights? = nil,
-        source: RFC_4287.Source? = nil,
-        summary: RFC_4287.Summary? = nil,
+        id: some IETF.RFC.`3987`.IRI.Representable,
+        title: IETF.RFC.`4287`.Title,
+        updated: IETF.RFC.`3339`.DateTime,
+        authors: [IETF.RFC.`4287`.Author] = [],
+        content: IETF.RFC.`4287`.Content? = nil,
+        links: [IETF.RFC.`4287`.Link] = [],
+        categories: [IETF.RFC.`4287`.Category] = [],
+        contributors: [IETF.RFC.`4287`.Contributor] = [],
+        published: IETF.RFC.`3339`.DateTime? = nil,
+        rights: IETF.RFC.`4287`.Rights? = nil,
+        source: IETF.RFC.`4287`.Source? = nil,
+        summary: IETF.RFC.`4287`.Summary? = nil,
 
-        base: (any RFC_3987.IRI.Representable)? = nil,
-        lang: RFC_5646.LanguageTag? = nil
+        base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
+        lang: IETF.RFC.`5646`.LanguageTag? = nil
     ) throws(Error) {
         try self.init(
             id: id.iri,

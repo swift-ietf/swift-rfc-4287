@@ -25,6 +25,7 @@ let package = Package(
         .trait(name: "XML", description: "RFC 4287 XML: a feed as a W3C XML element")
     ],
     dependencies: [
+        .package(url: "https://github.com/swift-ietf/swift-rfc.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-2822.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-3339.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-3987.git", branch: "main"),
@@ -38,6 +39,7 @@ let package = Package(
         .target(
             name: "RFC 4287",
             dependencies: [
+                .product(name: "IETF RFC", package: "swift-rfc"),
                 .product(name: "RFC 2822", package: "swift-rfc-2822"),
                 .product(name: "RFC 3339", package: "swift-rfc-3339"),
                 .product(name: "RFC 3987", package: "swift-rfc-3987"),

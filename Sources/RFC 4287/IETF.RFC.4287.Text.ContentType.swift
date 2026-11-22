@@ -1,4 +1,4 @@
-extension RFC_4287.Text {
+extension IETF.RFC.`4287`.Text {
 
     public enum ContentType: String, Hashable, Sendable, Codable {
         case text

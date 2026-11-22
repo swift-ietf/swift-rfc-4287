@@ -7,29 +7,29 @@
     @testable import RFC_4287
 
     @Suite struct `An Atom feed written as XML` {
-        func updated() throws -> RFC_3339.DateTime {
-            RFC_3339.DateTime(time: try Gregorian.DateTime(year: 2026, month: 11, day: 5, hour: 0, minute: 0, second: 0), offset: .utc)
+        func updated() throws -> IETF.RFC.`3339`.DateTime {
+            IETF.RFC.`3339`.DateTime(time: try Gregorian.DateTime(year: 2026, month: 11, day: 5, hour: 0, minute: 0, second: 0), offset: .utc)
         }
 
-        func feed(summary: RFC_4287.Summary? = nil) throws -> RFC_4287.Feed {
-            try RFC_4287.Feed(
+        func feed(summary: IETF.RFC.`4287`.Summary? = nil) throws -> IETF.RFC.`4287`.Feed {
+            try IETF.RFC.`4287`.Feed(
                 id: "https://feed.rule.law/nl",
                 title: "Wetten & regels",
                 updated: try updated(),
                 authors: ["rule.law"],
                 entries: [
-                    RFC_4287.Entry(
+                    IETF.RFC.`4287`.Entry(
                         id: "https://feed.rule.law/nl/stb-2026-368",
                         title: "Staatsblad 2026, 368",
                         updated: try updated(),
-                        content: RFC_4287.Content(value: "A < B", type: .text),
+                        content: IETF.RFC.`4287`.Content(value: "A < B", type: .text),
                         summary: summary
                     )
                 ]
             )
         }
 
-        func parsed(_ feed: RFC_4287.Feed) throws -> W3C.XML.Element {
+        func parsed(_ feed: IETF.RFC.`4287`.Feed) throws -> W3C.XML.Element {
             try W3C.XML.parse(W3C.XML.Document(feed).encode()).root
         }
 
@@ -53,7 +53,7 @@
         }
 
         @Test func `xhtml text is written as an XHTML div, not as escaped markup`() throws {
-            let summary = RFC_4287.Summary("<p>In werking <b>1 januari</b></p>", type: .xhtml)
+            let summary = IETF.RFC.`4287`.Summary("<p>In werking <b>1 januari</b></p>", type: .xhtml)
             let entry = try #require(try parsed(try feed(summary: summary)).children.first { $0.name.local == "entry" })
             let written = try #require(entry.children.first { $0.name.local == "summary" })
             let division = try #require(written.children.first)

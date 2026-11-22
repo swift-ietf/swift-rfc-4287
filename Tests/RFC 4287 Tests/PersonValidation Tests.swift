@@ -18,8 +18,8 @@ extension `PersonValidation Tests` {
 extension `PersonValidation Tests`.`Person Email Validation`.Unit {
     @Test
     func `Person with valid email succeeds`() throws {
-        let email = try RFC_2822.AddrSpec(ascii: "john@example.com".utf8.map { Byte($0) })
-        let person = RFC_4287.Person(name: "John Doe", uri: nil, email: email)
+        let email = try IETF.RFC.`2822`.AddrSpec(ascii: "john@example.com".utf8.map { Byte($0) })
+        let person = IETF.RFC.`4287`.Person(name: "John Doe", uri: nil, email: email)
 
         #expect(person.name == "John Doe")
         #expect(person.email?.description == "john@example.com")
@@ -27,7 +27,7 @@ extension `PersonValidation Tests`.`Person Email Validation`.Unit {
 
     @Test
     func `Person with nil email succeeds`() {
-        let person = RFC_4287.Person(name: "Jane Doe", uri: nil, email: nil)
+        let person = IETF.RFC.`4287`.Person(name: "Jane Doe", uri: nil, email: nil)
 
         #expect(person.name == "Jane Doe")
         #expect(person.email == nil)
@@ -35,8 +35,8 @@ extension `PersonValidation Tests`.`Person Email Validation`.Unit {
 
     @Test
     func `Person with URI and email`() throws {
-        let email = try RFC_2822.AddrSpec(ascii: "contact@example.org".utf8.map { Byte($0) })
-        let person = RFC_4287.Person(
+        let email = try IETF.RFC.`2822`.AddrSpec(ascii: "contact@example.org".utf8.map { Byte($0) })
+        let person = IETF.RFC.`4287`.Person(
             name: "Contact Person",
             uri: "https://example.org",
             email: email
@@ -49,10 +49,10 @@ extension `PersonValidation Tests`.`Person Email Validation`.Unit {
 
     @Test
     func `Person with convenience emailString initializer`() throws {
-        let person = try RFC_4287.Person(
+        let person = try IETF.RFC.`4287`.Person(
             name: "Test User",
             uri: nil,
-            email: RFC_2822.AddrSpec(ascii: "test@example.com".utf8.map { Byte($0) }),
+            email: IETF.RFC.`2822`.AddrSpec(ascii: "test@example.com".utf8.map { Byte($0) }),
             base: nil,
             lang: nil
         )
@@ -63,27 +63,27 @@ extension `PersonValidation Tests`.`Person Email Validation`.Unit {
 
     @Test
     func `Invalid email string throws`() {
-        #expect(throws: RFC_2822.AddrSpec.Error.self) {
-            try RFC_4287.Person(
+        #expect(throws: IETF.RFC.`2822`.AddrSpec.Error.self) {
+            try IETF.RFC.`4287`.Person(
                 name: "Invalid",
                 uri: nil,
-                email: RFC_2822.AddrSpec(ascii: "not-an-email".utf8.map { Byte($0) })
+                email: IETF.RFC.`2822`.AddrSpec(ascii: "not-an-email".utf8.map { Byte($0) })
             )
         }
     }
 
     @Test
     func `Email with special characters in local-part`() throws {
-        let email = try RFC_2822.AddrSpec(ascii: "user+tag@example.com".utf8.map { Byte($0) })
-        let person = RFC_4287.Person(name: "Tagged User", uri: nil, email: email)
+        let email = try IETF.RFC.`2822`.AddrSpec(ascii: "user+tag@example.com".utf8.map { Byte($0) })
+        let person = IETF.RFC.`4287`.Person(name: "Tagged User", uri: nil, email: email)
 
         #expect(person.email?.description == "user+tag@example.com")
     }
 
     @Test
     func `Email with subdomain`() throws {
-        let email = try RFC_2822.AddrSpec(ascii: "admin@mail.example.com".utf8.map { Byte($0) })
-        let person = RFC_4287.Person(name: "Admin", uri: nil, email: email)
+        let email = try IETF.RFC.`2822`.AddrSpec(ascii: "admin@mail.example.com".utf8.map { Byte($0) })
+        let person = IETF.RFC.`4287`.Person(name: "Admin", uri: nil, email: email)
 
         #expect(person.email?.description == "admin@mail.example.com")
     }
@@ -101,8 +101,8 @@ extension `PersonValidation Tests` {
 extension `PersonValidation Tests`.`Person Codable with Email`.Unit {
     @Test
     func `Encode Person with email`() throws {
-        let email = try RFC_2822.AddrSpec(ascii: "test@example.com".utf8.map { Byte($0) })
-        let person = RFC_4287.Person(name: "Test", uri: nil, email: email)
+        let email = try IETF.RFC.`2822`.AddrSpec(ascii: "test@example.com".utf8.map { Byte($0) })
+        let person = IETF.RFC.`4287`.Person(name: "Test", uri: nil, email: email)
 
         let encoder = JSONEncoder()
         let data = try encoder.encode(person)
@@ -119,7 +119,7 @@ extension `PersonValidation Tests`.`Person Codable with Email`.Unit {
             """
 
         let decoder = JSONDecoder()
-        let person = try decoder.decode(RFC_4287.Person.self, from: json.data(using: .utf8)!)
+        let person = try decoder.decode(IETF.RFC.`4287`.Person.self, from: json.data(using: .utf8)!)
 
         #expect(person.name == "Decoder")
         #expect(person.email?.description == "decode@example.com")
@@ -132,7 +132,7 @@ extension `PersonValidation Tests`.`Person Codable with Email`.Unit {
             """
 
         let decoder = JSONDecoder()
-        let person = try decoder.decode(RFC_4287.Person.self, from: json.data(using: .utf8)!)
+        let person = try decoder.decode(IETF.RFC.`4287`.Person.self, from: json.data(using: .utf8)!)
 
         #expect(person.name == "No Email")
         #expect(person.email == nil)
@@ -146,20 +146,20 @@ extension `PersonValidation Tests`.`Person Codable with Email`.Unit {
 
         let decoder = JSONDecoder()
         #expect(throws: DecodingError.self) {
-            _ = try decoder.decode(RFC_4287.Person.self, from: json.data(using: .utf8)!)
+            _ = try decoder.decode(IETF.RFC.`4287`.Person.self, from: json.data(using: .utf8)!)
         }
     }
 
     @Test
     func `Round-trip encoding preserves email`() throws {
-        let email = try RFC_2822.AddrSpec(ascii: "round@trip.com".utf8.map { Byte($0) })
-        let original = RFC_4287.Person(name: "Round Trip", uri: "https://trip.com", email: email)
+        let email = try IETF.RFC.`2822`.AddrSpec(ascii: "round@trip.com".utf8.map { Byte($0) })
+        let original = IETF.RFC.`4287`.Person(name: "Round Trip", uri: "https://trip.com", email: email)
 
         let encoder = JSONEncoder()
         let data = try encoder.encode(original)
 
         let decoder = JSONDecoder()
-        let decoded = try decoder.decode(RFC_4287.Person.self, from: data)
+        let decoded = try decoder.decode(IETF.RFC.`4287`.Person.self, from: data)
 
         #expect(decoded.name == original.name)
         #expect(decoded.uri == original.uri)
@@ -179,9 +179,9 @@ extension `PersonValidation Tests` {
 extension `PersonValidation Tests`.`Person IRI.Representable Integration`.Unit {
     @Test
     func `Person with IRI from string literal`() throws {
-        let iri: RFC_3987.IRI = "https://example.com/~user"
-        let email = try RFC_2822.AddrSpec(ascii: "user@example.com".utf8.map { Byte($0) })
-        let person = RFC_4287.Person(name: "User", uri: iri, email: email)
+        let iri: IETF.RFC.`3987`.IRI = "https://example.com/~user"
+        let email = try IETF.RFC.`2822`.AddrSpec(ascii: "user@example.com".utf8.map { Byte($0) })
+        let person = IETF.RFC.`4287`.Person(name: "User", uri: iri, email: email)
 
         #expect(person.uri == "https://example.com/~user")
     }
@@ -189,9 +189,9 @@ extension `PersonValidation Tests`.`Person IRI.Representable Integration`.Unit {
     @Test
     func `Person with Foundation URL via IRI.Representable`() throws {
         let url = URL(string: "https://example.com/~user")!
-        let iri: RFC_3987.IRI = try .init(url.absoluteString)
-        let email = try RFC_2822.AddrSpec(ascii: "user@example.com".utf8.map { Byte($0) })
-        let person = RFC_4287.Person(name: "User", uri: iri, email: email)
+        let iri: IETF.RFC.`3987`.IRI = try .init(url.absoluteString)
+        let email = try IETF.RFC.`2822`.AddrSpec(ascii: "user@example.com".utf8.map { Byte($0) })
+        let person = IETF.RFC.`4287`.Person(name: "User", uri: iri, email: email)
 
         #expect(person.uri == "https://example.com/~user")
     }

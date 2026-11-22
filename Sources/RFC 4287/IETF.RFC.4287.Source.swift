@@ -1,7 +1,7 @@
 import RFC_3987
 public import RFC_5646
 
-extension RFC_4287 {
+extension IETF.RFC.`4287` {
 
     public struct Source: Hashable, Sendable, Codable {
 
@@ -13,13 +13,13 @@ extension RFC_4287 {
 
         public let generator: Generator?
 
-        public let icon: RFC_3987.IRI?
+        public let icon: IETF.RFC.`3987`.IRI?
 
-        public let id: RFC_3987.IRI?
+        public let id: IETF.RFC.`3987`.IRI?
 
         public let links: [Link]
 
-        public let logo: RFC_3987.IRI?
+        public let logo: IETF.RFC.`3987`.IRI?
 
         public let rights: Rights?
 
@@ -27,27 +27,27 @@ extension RFC_4287 {
 
         public let title: Title?
 
-        public let updated: RFC_3339.DateTime?
+        public let updated: IETF.RFC.`3339`.DateTime?
 
-        public let base: RFC_3987.IRI?
+        public let base: IETF.RFC.`3987`.IRI?
 
-        public let lang: RFC_5646.LanguageTag?
+        public let lang: IETF.RFC.`5646`.LanguageTag?
 
         public init(
             authors: [Author] = [],
             categories: [Category] = [],
             contributors: [Contributor] = [],
             generator: Generator? = nil,
-            icon: RFC_3987.IRI? = nil,
-            id: RFC_3987.IRI? = nil,
+            icon: IETF.RFC.`3987`.IRI? = nil,
+            id: IETF.RFC.`3987`.IRI? = nil,
             links: [Link] = [],
-            logo: RFC_3987.IRI? = nil,
+            logo: IETF.RFC.`3987`.IRI? = nil,
             rights: Rights? = nil,
             subtitle: Subtitle? = nil,
             title: Title? = nil,
-            updated: RFC_3339.DateTime? = nil,
-            base: RFC_3987.IRI? = nil,
-            lang: RFC_5646.LanguageTag? = nil
+            updated: IETF.RFC.`3339`.DateTime? = nil,
+            base: IETF.RFC.`3987`.IRI? = nil,
+            lang: IETF.RFC.`5646`.LanguageTag? = nil
         ) {
             self.authors = authors
             self.categories = categories
@@ -71,19 +71,19 @@ extension RFC_4287 {
             contributors: [Contributor] = [],
             generator: Generator? = nil,
 
-            icon: (any RFC_3987.IRI.Representable)? = nil,
+            icon: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
 
-            id: (any RFC_3987.IRI.Representable)? = nil,
+            id: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
             links: [Link] = [],
 
-            logo: (any RFC_3987.IRI.Representable)? = nil,
+            logo: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
             rights: Rights? = nil,
             subtitle: Subtitle? = nil,
             title: Title? = nil,
-            updated: RFC_3339.DateTime? = nil,
+            updated: IETF.RFC.`3339`.DateTime? = nil,
 
-            base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: RFC_5646.LanguageTag? = nil
+            base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
+            lang: IETF.RFC.`5646`.LanguageTag? = nil
         ) {
             self.init(
                 authors: authors,

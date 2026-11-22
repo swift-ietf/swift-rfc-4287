@@ -1,4 +1,4 @@
-extension RFC_4287.Feed {
+extension IETF.RFC.`4287`.Feed {
     public enum Error: Swift::Error {
         case blank
     }

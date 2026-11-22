@@ -1,11 +1,11 @@
 import RFC_3987
 public import RFC_5646
 
-extension RFC_4287 {
+extension IETF.RFC.`4287` {
 
     public struct Link: Hashable, Sendable, Codable {
 
-        public let href: RFC_3987.IRI
+        public let href: IETF.RFC.`3987`.IRI
 
         public let rel: Relation?
 
@@ -17,19 +17,19 @@ extension RFC_4287 {
 
         public let length: Int?
 
-        public let base: RFC_3987.IRI?
+        public let base: IETF.RFC.`3987`.IRI?
 
-        public let lang: RFC_5646.LanguageTag?
+        public let lang: IETF.RFC.`5646`.LanguageTag?
 
         public init(
-            href: RFC_3987.IRI,
+            href: IETF.RFC.`3987`.IRI,
             rel: Relation? = nil,
             type: String? = nil,
             hreflang: String? = nil,
             title: String? = nil,
             length: Int? = nil,
-            base: RFC_3987.IRI? = nil,
-            lang: RFC_5646.LanguageTag? = nil
+            base: IETF.RFC.`3987`.IRI? = nil,
+            lang: IETF.RFC.`5646`.LanguageTag? = nil
         ) {
             self.href = href
             self.rel = rel
@@ -42,15 +42,15 @@ extension RFC_4287 {
         }
 
         public init(
-            href: some RFC_3987.IRI.Representable,
+            href: some IETF.RFC.`3987`.IRI.Representable,
             rel: Relation? = nil,
             type: String? = nil,
             hreflang: String? = nil,
             title: String? = nil,
             length: Int? = nil,
 
-            base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: RFC_5646.LanguageTag? = nil
+            base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
+            lang: IETF.RFC.`5646`.LanguageTag? = nil
         ) {
             self.init(
                 href: href.iri,
@@ -66,7 +66,7 @@ extension RFC_4287 {
     }
 }
 
-extension RFC_4287.Link {
+extension IETF.RFC.`4287`.Link {
 
     public var isAlternate: Bool {
         rel == .alternate || rel == nil

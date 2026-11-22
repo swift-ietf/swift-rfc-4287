@@ -8,13 +8,13 @@
     public import W3C_XML
 
     extension W3C.XML.Document {
-        public init(_ feed: RFC_4287.Feed) throws(W3C.XML.Parse.Error) {
+        public init(_ feed: IETF.RFC.`4287`.Feed) throws(W3C.XML.Parse.Error) {
             self.init(declaration: W3C.XML.Declaration(version: .v1_0, encoding: "UTF-8"), root: try W3C.XML.Element(feed))
         }
     }
 
     extension W3C.XML.Element {
-        public init(_ feed: RFC_4287.Feed) throws(W3C.XML.Parse.Error) {
+        public init(_ feed: IETF.RFC.`4287`.Feed) throws(W3C.XML.Parse.Error) {
             var content: [W3C.XML.Element] = feed.authors.map { W3C.XML.Element(atom: "author", $0.person) }
             content += feed.categories.map(W3C.XML.Element.init)
             content += feed.contributors.map { W3C.XML.Element(atom: "contributor", $0.person) }
@@ -36,7 +36,7 @@
             )
         }
 
-        public init(_ entry: RFC_4287.Entry) throws(W3C.XML.Parse.Error) {
+        public init(_ entry: IETF.RFC.`4287`.Entry) throws(W3C.XML.Parse.Error) {
             var content: [W3C.XML.Element] = entry.authors.map { W3C.XML.Element(atom: "author", $0.person) }
             content += entry.categories.map(W3C.XML.Element.init)
             content += [try entry.content.map { content throws(W3C.XML.Parse.Error) in try W3C.XML.Element(content) }].compactMap(\.self)
@@ -52,7 +52,7 @@
             self.init(name: "entry", attributes: W3C.XML.Attribute.common(base: entry.base, lang: entry.lang), content: content.map(W3C.XML.Content.element))
         }
 
-        public init(_ source: RFC_4287.Source) throws(W3C.XML.Parse.Error) {
+        public init(_ source: IETF.RFC.`4287`.Source) throws(W3C.XML.Parse.Error) {
             var content: [W3C.XML.Element] = source.authors.map { W3C.XML.Element(atom: "author", $0.person) }
             content += source.categories.map(W3C.XML.Element.init)
             content += source.contributors.map { W3C.XML.Element(atom: "contributor", $0.person) }
@@ -68,7 +68,7 @@
             self.init(name: "source", attributes: W3C.XML.Attribute.common(base: source.base, lang: source.lang), content: content.map(W3C.XML.Content.element))
         }
 
-        public init(atom name: String, _ person: RFC_4287.Person) {
+        public init(atom name: String, _ person: IETF.RFC.`4287`.Person) {
             let content: [W3C.XML.Element?] = [
                 W3C.XML.Element(atom: "name", person.name),
                 person.uri.map { W3C.XML.Element(atom: "uri", $0.description) },
@@ -77,7 +77,7 @@
             self.init(name: name, attributes: W3C.XML.Attribute.common(base: person.base, lang: person.lang), content: content.compactMap { $0.map(W3C.XML.Content.element) })
         }
 
-        public init(atom name: String, _ text: RFC_4287.Text) throws(W3C.XML.Parse.Error) {
+        public init(atom name: String, _ text: IETF.RFC.`4287`.Text) throws(W3C.XML.Parse.Error) {
             self.init(
                 name: name,
                 attributes: [W3C.XML.Attribute(name: "type", value: text.type.rawValue)] + W3C.XML.Attribute.common(base: text.base, lang: text.lang),
@@ -85,7 +85,7 @@
             )
         }
 
-        public init(_ content: RFC_4287.Content) throws(W3C.XML.Parse.Error) {
+        public init(_ content: IETF.RFC.`4287`.Content) throws(W3C.XML.Parse.Error) {
             let type: String =
                 switch content.type {
                 case .text: "text"
@@ -105,7 +105,7 @@
             self.init(name: "content", attributes: attributes, content: body)
         }
 
-        public init(_ link: RFC_4287.Link) {
+        public init(_ link: IETF.RFC.`4287`.Link) {
             var attributes = [W3C.XML.Attribute(name: "href", value: link.href.description)]
             attributes += [
                 link.rel.map { W3C.XML.Attribute(name: "rel", value: $0.value) },
@@ -118,7 +118,7 @@
             self.init(name: "link", attributes: attributes)
         }
 
-        public init(_ category: RFC_4287.Category) {
+        public init(_ category: IETF.RFC.`4287`.Category) {
             var attributes = [W3C.XML.Attribute(name: "term", value: category.term)]
             attributes += [
                 category.scheme.map { W3C.XML.Attribute(name: "scheme", value: $0.description) },
@@ -128,7 +128,7 @@
             self.init(name: "category", attributes: attributes)
         }
 
-        public init(_ generator: RFC_4287.Generator) {
+        public init(_ generator: IETF.RFC.`4287`.Generator) {
             var attributes = [
                 generator.uri.map { W3C.XML.Attribute(name: "uri", value: $0.description) },
                 generator.version.map { W3C.XML.Attribute(name: "version", value: $0) },
@@ -154,7 +154,7 @@
     }
 
     extension W3C.XML.Attribute {
-        static func common(base: RFC_3987.IRI?, lang: RFC_5646.LanguageTag?) -> [Self] {
+        static func common(base: IETF.RFC.`3987`.IRI?, lang: IETF.RFC.`5646`.LanguageTag?) -> [Self] {
             [
                 base.map { W3C.XML.Attribute(name: W3C.XML.Name(local: "base", prefix: "xml"), value: $0.description) },
                 lang.map { W3C.XML.Attribute(name: W3C.XML.Name(local: "lang", prefix: "xml"), value: $0.description) },

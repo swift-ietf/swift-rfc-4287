@@ -17,27 +17,27 @@ extension `DateFormatting Tests` {
 extension `DateFormatting Tests`.`RFC 3339 DateTime Tests`.Unit {
     @Test func `create date time from components`() async throws {
         let time = try Gregorian.DateTime(year: 2021, month: 1, day: 1, hour: 0, minute: 0, second: 0)
-        let dateTime = RFC_3339.DateTime(time: time, offset: .utc)
+        let dateTime = IETF.RFC.`3339`.DateTime(time: time, offset: .utc)
 
         #expect(dateTime.time.year == 2021)
         #expect(dateTime.time.month == 1)
         #expect(dateTime.time.day == 1)
-        #expect(dateTime.offset == RFC_3339.Offset.utc)
+        #expect(dateTime.offset == IETF.RFC.`3339`.Offset.utc)
     }
 
     @Test func `parse RFC 3339 string`() async throws {
         let dateString = "2021-01-01T00:00:00Z"
-        let dateTime = try RFC_3339.DateTime(dateString)
+        let dateTime = try IETF.RFC.`3339`.DateTime(dateString)
 
         #expect(dateTime.time.year == 2021)
         #expect(dateTime.time.month == 1)
         #expect(dateTime.time.day == 1)
-        #expect(dateTime.offset == RFC_3339.Offset.utc)
+        #expect(dateTime.offset == IETF.RFC.`3339`.Offset.utc)
     }
 
     @Test func `format RFC 3339 string`() async throws {
         let time = try Gregorian.DateTime(year: 2021, month: 1, day: 1, hour: 12, minute: 30, second: 45)
-        let dateTime = RFC_3339.DateTime(time: time, offset: .utc)
+        let dateTime = IETF.RFC.`3339`.DateTime(time: time, offset: .utc)
 
         let formatted = String(dateTime)
 
@@ -48,10 +48,10 @@ extension `DateFormatting Tests`.`RFC 3339 DateTime Tests`.Unit {
 
     @Test func `round trip date time formatting`() async throws {
         let time = try Gregorian.DateTime(year: 2021, month: 6, day: 15, hour: 14, minute: 30, second: 0)
-        let original = RFC_3339.DateTime(time: time, offset: .utc)
+        let original = IETF.RFC.`3339`.DateTime(time: time, offset: .utc)
 
         let formatted = String(original)
-        let parsed = try RFC_3339.DateTime(formatted)
+        let parsed = try IETF.RFC.`3339`.DateTime(formatted)
 
         #expect(parsed.time.year == original.time.year)
         #expect(parsed.time.month == original.time.month)
@@ -69,7 +69,7 @@ extension `DateFormatting Tests`.`RFC 3339 DateTime Tests`.Unit {
         ]
 
         for format in formats {
-            let dateTime = try RFC_3339.DateTime(format)
+            let dateTime = try IETF.RFC.`3339`.DateTime(format)
             #expect(dateTime.time.year > 0)
         }
     }

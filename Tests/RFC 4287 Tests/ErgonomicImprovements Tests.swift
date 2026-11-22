@@ -15,12 +15,12 @@ extension `ErgonomicImprovements Tests` {
 
 extension `ErgonomicImprovements Tests`.`Ergonomic Improvements Tests`.Unit {
     @Test func `category expressible by string literal`() async throws {
-        let category: RFC_4287.Category = "Technology"
+        let category: IETF.RFC.`4287`.Category = "Technology"
         #expect(category.term == "Technology")
         #expect(category.scheme == nil)
         #expect(category.label == nil)
 
-        let categories: [RFC_4287.Category] = ["News", "Sports", "Politics"]
+        let categories: [IETF.RFC.`4287`.Category] = ["News", "Sports", "Politics"]
         #expect(categories.count == 3)
         #expect(categories[0].term == "News")
         #expect(categories[1].term == "Sports")
@@ -28,12 +28,12 @@ extension `ErgonomicImprovements Tests`.`Ergonomic Improvements Tests`.Unit {
     }
 
     @Test func `person expressible by string literal`() async throws {
-        let person: RFC_4287.Person = "John Doe"
+        let person: IETF.RFC.`4287`.Person = "John Doe"
         #expect(person.name == "John Doe")
         #expect(person.uri == nil)
         #expect(person.email == nil)
 
-        let authors: [RFC_4287.Person] = ["Alice", "Bob", "Carol"]
+        let authors: [IETF.RFC.`4287`.Person] = ["Alice", "Bob", "Carol"]
         #expect(authors.count == 3)
         #expect(authors[0].name == "Alice")
         #expect(authors[1].name == "Bob")
@@ -41,14 +41,14 @@ extension `ErgonomicImprovements Tests`.`Ergonomic Improvements Tests`.Unit {
     }
 
     @Test func `link expressible by string literal`() async throws {
-        let link: RFC_4287.Link = try .init(href: .init("https://example.com/post"))
+        let link: IETF.RFC.`4287`.Link = try .init(href: .init("https://example.com/post"))
         #expect(link.href == "https://example.com/post")
         #expect(link.rel == nil)
         #expect(link.type == nil)
         #expect(link.title == nil)
         #expect(link.length == nil)
 
-        let links: [RFC_4287.Link] = [
+        let links: [IETF.RFC.`4287`.Link] = [
             .init(href: "https://example.com/1"),
             .init(href: "https://example.com/2"),
         ]

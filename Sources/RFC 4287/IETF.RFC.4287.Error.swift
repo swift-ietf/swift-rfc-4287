@@ -1,4 +1,4 @@
-extension RFC_4287 {
+extension IETF.RFC.`4287` {
 
     public enum Error: Swift::Error, Hashable, Sendable {
         case feedRequiresAuthors

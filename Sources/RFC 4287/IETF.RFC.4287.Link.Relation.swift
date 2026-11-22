@@ -1,6 +1,6 @@
 import RFC_3987
 
-extension RFC_4287.Link {
+extension IETF.RFC.`4287`.Link {
 
     public struct Relation: Hashable, Sendable, ExpressibleByStringLiteral {
 
@@ -12,7 +12,7 @@ extension RFC_4287.Link {
     }
 }
 
-extension RFC_4287.Link.Relation {
+extension IETF.RFC.`4287`.Link.Relation {
 
     public static let alternate = Self("alternate")
 
@@ -27,14 +27,14 @@ extension RFC_4287.Link.Relation {
     public static let replies = Self("replies")
 }
 
-extension RFC_4287.Link.Relation {
+extension IETF.RFC.`4287`.Link.Relation {
 
     public init(stringLiteral value: String) {
         self.init(value)
     }
 }
 
-extension RFC_4287.Link.Relation: Codable {
+extension IETF.RFC.`4287`.Link.Relation: Codable {
     public init(from decoder: any Decoder) throws(DecodingError) {
 
         do {

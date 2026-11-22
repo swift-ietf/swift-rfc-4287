@@ -2,7 +2,7 @@ import RFC_2822
 import RFC_3987
 import RFC_5646
 
-extension RFC_4287.Person: Codable {
+extension IETF.RFC.`4287`.Person: Codable {
     enum CodingKeys: String, CodingKey {
         case name
         case uri
@@ -17,14 +17,14 @@ extension RFC_4287.Person: Codable {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             name = try container.decode(String.self, forKey: .name)
             if let uriString = try container.decodeIfPresent(String.self, forKey: .uri) {
-                uri = try RFC_3987.IRI(uriString)
+                uri = try IETF.RFC.`3987`.IRI(uriString)
             } else {
                 uri = nil
             }
 
             if let emailString = try container.decodeIfPresent(String.self, forKey: .email) {
-                do throws(RFC_2822.AddrSpec.Error) {
-                    email = try RFC_2822.AddrSpec(ascii: emailString.utf8.map { Byte($0) })
+                do throws(IETF.RFC.`2822`.AddrSpec.Error) {
+                    email = try IETF.RFC.`2822`.AddrSpec(ascii: emailString.utf8.map { Byte($0) })
                 } catch {
                     throw DecodingError.dataCorruptedError(
                         forKey: .email,
@@ -37,11 +37,11 @@ extension RFC_4287.Person: Codable {
             }
 
             if let baseString = try container.decodeIfPresent(String.self, forKey: .base) {
-                base = try RFC_3987.IRI(baseString)
+                base = try IETF.RFC.`3987`.IRI(baseString)
             } else {
                 base = nil
             }
-            lang = try container.decodeIfPresent(RFC_5646.LanguageTag.self, forKey: .lang)
+            lang = try container.decodeIfPresent(IETF.RFC.`5646`.LanguageTag.self, forKey: .lang)
         } catch let error as DecodingError {
             throw error
         } catch {

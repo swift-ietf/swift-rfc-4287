@@ -2,24 +2,24 @@ import RFC_3987
 public import RFC_5646
 public import RFC_9110
 
-extension RFC_4287 {
+extension IETF.RFC.`4287` {
     public struct Content: Hashable, Sendable, Codable {
         public let type: ContentType
 
         public let value: String?
 
-        public let src: RFC_3987.IRI?
+        public let src: IETF.RFC.`3987`.IRI?
 
-        public let base: RFC_3987.IRI?
+        public let base: IETF.RFC.`3987`.IRI?
 
-        public let lang: RFC_5646.LanguageTag?
+        public let lang: IETF.RFC.`5646`.LanguageTag?
 
         public init(
             value: String,
             type: ContentType = .text,
 
-            base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: RFC_5646.LanguageTag? = nil
+            base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
+            lang: IETF.RFC.`5646`.LanguageTag? = nil
         ) {
             self.value = value
             self.type = type
@@ -30,10 +30,10 @@ extension RFC_4287 {
 
         public init(
             rawBytes: [UInt8],
-            mediaType: RFC_9110.MediaType,
+            mediaType: IETF.RFC.`9110`.MediaType,
 
-            base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: RFC_5646.LanguageTag? = nil
+            base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
+            lang: IETF.RFC.`5646`.LanguageTag? = nil
         ) {
             self.value = rawBytes.map { Byte($0) }.base64()
             self.type = .media(mediaType)
@@ -43,10 +43,10 @@ extension RFC_4287 {
         }
 
         public init(
-            src: RFC_3987.IRI,
+            src: IETF.RFC.`3987`.IRI,
             type: ContentType = .text,
-            base: RFC_3987.IRI? = nil,
-            lang: RFC_5646.LanguageTag? = nil
+            base: IETF.RFC.`3987`.IRI? = nil,
+            lang: IETF.RFC.`5646`.LanguageTag? = nil
         ) {
             self.value = nil
             self.type = type
@@ -56,27 +56,27 @@ extension RFC_4287 {
         }
 
         public init(
-            src: some RFC_3987.IRI.Representable,
+            src: some IETF.RFC.`3987`.IRI.Representable,
             type: ContentType = .text,
 
-            base: (any RFC_3987.IRI.Representable)? = nil,
-            lang: RFC_5646.LanguageTag? = nil
+            base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
+            lang: IETF.RFC.`5646`.LanguageTag? = nil
         ) {
             self.init(src: src.iri, type: type, base: base?.iri, lang: lang)
         }
     }
 }
 
-extension RFC_4287.Content {
+extension IETF.RFC.`4287`.Content {
 }
 
-extension RFC_4287.Content.ContentType {
+extension IETF.RFC.`4287`.Content.ContentType {
     public init(stringValue: String) {
         switch stringValue {
         case "text": self = .text
         case "html": self = .html
         case "xhtml": self = .xhtml
-        default: self = RFC_9110.MediaType(parsing: stringValue).map(Self.media) ?? .text
+        default: self = IETF.RFC.`9110`.MediaType(parsing: stringValue).map(Self.media) ?? .text
         }
     }
 
@@ -99,7 +99,7 @@ extension RFC_4287.Content.ContentType {
     }
 }
 
-extension RFC_4287.Content.ContentType {
+extension IETF.RFC.`4287`.Content.ContentType {
     public var stringValue: String {
         switch self {
         case .text: return "text"
@@ -128,7 +128,7 @@ extension RFC_4287.Content.ContentType {
     }
 }
 
-extension RFC_4287.Content {
+extension IETF.RFC.`4287`.Content {
     public var requiresBase64Encoding: Bool {
         guard case .media(let mediaType) = type else {
             return false
