@@ -1,6 +1,6 @@
 # swift-rfc-4287
 
-Use this package when you need to model an Atom feed (RFC 4287) as values and have its structural rules checked when you build it. Start from `RFC_4287.Feed` and `RFC_4287.Entry`. To write a feed as Atom XML, add `RFC 4287 XML` and encode `W3C_XML.Document(feed)`. The package does not read Atom XML, and its `Codable` conformances give a keyed form of the same fields. For RSS, use swift-rss-standard. For JSON Feed, use swift-json-feed-standard.
+Use this package when you need to model an Atom feed (RFC 4287) as values and have its structural rules checked when you build it. Start from `RFC_4287.Feed` and `RFC_4287.Entry`. To write a feed as Atom XML, add `RFC 4287 XML` and encode `W3C.XML.Document(feed)`. The package does not read Atom XML, and its `Codable` conformances give a keyed form of the same fields. For RSS, use swift-rss-standard. For JSON Feed, use swift-json-feed-standard.
 
 ## Laws
 

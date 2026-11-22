@@ -19,7 +19,10 @@ let package = Package(
         .library(
             name: "RFC 4287 XML",
             targets: ["RFC 4287 XML"]
-        )
+        ),
+    ],
+    traits: [
+        .trait(name: "XML", description: "RFC 4287 XML: a feed as a W3C XML element")
     ],
     dependencies: [
         .package(url: "https://github.com/swift-ietf/swift-rfc-2822.git", branch: "main"),
@@ -35,7 +38,9 @@ let package = Package(
         .target(
             name: "RFC 4287",
             dependencies: [
-                .product(name: "RFC 2822", package: "swift-rfc-2822"), .product(name: "RFC 3339", package: "swift-rfc-3339"), .product(name: "RFC 3987", package: "swift-rfc-3987"),
+                .product(name: "RFC 2822", package: "swift-rfc-2822"),
+                .product(name: "RFC 3339", package: "swift-rfc-3339"),
+                .product(name: "RFC 3987", package: "swift-rfc-3987"),
                 .product(name: "RFC 4648", package: "swift-rfc-4648"),
                 .product(name: "RFC 5646", package: "swift-rfc-5646"),
                 .product(name: "RFC 9110", package: "swift-rfc-9110"),
@@ -45,7 +50,7 @@ let package = Package(
             name: "RFC 4287 XML",
             dependencies: [
                 .target(name: "RFC 4287"),
-                .product(name: "W3C XML", package: "swift-w3c-xml"),
+                .product(name: "W3C XML", package: "swift-w3c-xml", condition: .when(traits: ["XML"])),
                 .product(name: "RFC 2822", package: "swift-rfc-2822"),
                 .product(name: "RFC 3339", package: "swift-rfc-3339"),
                 .product(name: "RFC 3987", package: "swift-rfc-3987"),
