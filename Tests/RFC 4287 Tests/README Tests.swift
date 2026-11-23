@@ -8,9 +8,9 @@ private func currentDateTime() throws(Gregorian.DateTime.Error) -> IETF.RFC.`333
     return IETF.RFC.`3339`.DateTime(time: time, offset: .utc)
 }
 
-enum `ReadmeVerification Tests` {}
+enum `README Tests` {}
 
-extension `ReadmeVerification Tests` {
+extension `README Tests` {
     @Suite
     struct `README Verification` {
         @Suite struct Unit {}
@@ -19,7 +19,7 @@ extension `ReadmeVerification Tests` {
     }
 }
 
-extension `ReadmeVerification Tests`.`README Verification`.Unit {
+extension `README Tests`.`README Verification`.Unit {
     @Test
     func `String literal feed creation (README line 64-68)`() throws {
 

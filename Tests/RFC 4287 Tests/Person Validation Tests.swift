@@ -4,9 +4,9 @@ import Testing
 
 @testable import RFC_4287
 
-enum `PersonValidation Tests` {}
+enum `Person Validation Tests` {}
 
-extension `PersonValidation Tests` {
+extension `Person Validation Tests` {
     @Suite
     struct `Person Email Validation` {
         @Suite struct Unit {}
@@ -15,7 +15,7 @@ extension `PersonValidation Tests` {
     }
 }
 
-extension `PersonValidation Tests`.`Person Email Validation`.Unit {
+extension `Person Validation Tests`.`Person Email Validation`.Unit {
     @Test
     func `Person with valid email succeeds`() throws {
         let email = try IETF.RFC.`2822`.AddrSpec(ascii: "john@example.com".utf8.map { Byte($0) })
@@ -89,7 +89,7 @@ extension `PersonValidation Tests`.`Person Email Validation`.Unit {
     }
 }
 
-extension `PersonValidation Tests` {
+extension `Person Validation Tests` {
     @Suite
     struct `Person Codable with Email` {
         @Suite struct Unit {}
@@ -98,7 +98,7 @@ extension `PersonValidation Tests` {
     }
 }
 
-extension `PersonValidation Tests`.`Person Codable with Email`.Unit {
+extension `Person Validation Tests`.`Person Codable with Email`.Unit {
     @Test
     func `Encode Person with email`() throws {
         let email = try IETF.RFC.`2822`.AddrSpec(ascii: "test@example.com".utf8.map { Byte($0) })
@@ -167,7 +167,7 @@ extension `PersonValidation Tests`.`Person Codable with Email`.Unit {
     }
 }
 
-extension `PersonValidation Tests` {
+extension `Person Validation Tests` {
     @Suite
     struct `Person IRI.Representable Integration` {
         @Suite struct Unit {}
@@ -176,7 +176,7 @@ extension `PersonValidation Tests` {
     }
 }
 
-extension `PersonValidation Tests`.`Person IRI.Representable Integration`.Unit {
+extension `Person Validation Tests`.`Person IRI.Representable Integration`.Unit {
     @Test
     func `Person with IRI from string literal`() throws {
         let iri: IETF.RFC.`3987`.IRI = "https://example.com/~user"

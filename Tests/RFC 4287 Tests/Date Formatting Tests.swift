@@ -3,9 +3,9 @@ import Testing
 
 @testable import RFC_4287
 
-enum `DateFormatting Tests` {}
+enum `Date Formatting Tests` {}
 
-extension `DateFormatting Tests` {
+extension `Date Formatting Tests` {
     @Suite
     struct `RFC 3339 DateTime Tests` {
         @Suite struct Unit {}
@@ -14,7 +14,7 @@ extension `DateFormatting Tests` {
     }
 }
 
-extension `DateFormatting Tests`.`RFC 3339 DateTime Tests`.Unit {
+extension `Date Formatting Tests`.`RFC 3339 DateTime Tests`.Unit {
     @Test func `create date time from components`() async throws {
         let time = try Gregorian.DateTime(year: 2021, month: 1, day: 1, hour: 0, minute: 0, second: 0)
         let dateTime = IETF.RFC.`3339`.DateTime(time: time, offset: .utc)

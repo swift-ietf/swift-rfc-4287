@@ -2,9 +2,9 @@ import Testing
 
 @testable import RFC_4287
 
-enum `ErgonomicImprovements Tests` {}
+enum `Ergonomics Tests` {}
 
-extension `ErgonomicImprovements Tests` {
+extension `Ergonomics Tests` {
     @Suite
     struct `Ergonomic Improvements Tests` {
         @Suite struct Unit {}
@@ -13,7 +13,7 @@ extension `ErgonomicImprovements Tests` {
     }
 }
 
-extension `ErgonomicImprovements Tests`.`Ergonomic Improvements Tests`.Unit {
+extension `Ergonomics Tests`.`Ergonomic Improvements Tests`.Unit {
     @Test func `category expressible by string literal`() async throws {
         let category: IETF.RFC.`4287`.Category = "Technology"
         #expect(category.term == "Technology")
