@@ -15,7 +15,7 @@ extension IETF.RFC.`4287` {
             type: Text.ContentType = .text,
 
             base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-            lang: IETF.RFC.`5646`.LanguageTag? = nil
+            lang: IETF.RFC.`5646`.Tag? = nil
         ) {
             self.text = Text(value, type: type, base: base, lang: lang)
         }
@@ -30,7 +30,7 @@ extension IETF.RFC.`4287`.Rights {
 
     public var base: IETF.RFC.`3987`.IRI? { text.base }
 
-    public var lang: IETF.RFC.`5646`.LanguageTag? { text.lang }
+    public var lang: IETF.RFC.`5646`.Tag? { text.lang }
 }
 
 extension IETF.RFC.`4287`.Rights: ExpressibleByStringLiteral {

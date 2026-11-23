@@ -41,7 +41,7 @@ extension IETF.RFC.`4287`.Person: Codable {
             } else {
                 base = nil
             }
-            lang = try container.decodeIfPresent(IETF.RFC.`5646`.LanguageTag.self, forKey: .lang)
+            lang = try container.decodeIfPresent(IETF.RFC.`5646`.Tag.self, forKey: .lang)
         } catch let error as DecodingError {
             throw error
         } catch {

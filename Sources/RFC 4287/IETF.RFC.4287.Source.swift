@@ -31,7 +31,7 @@ extension IETF.RFC.`4287` {
 
         public let base: IETF.RFC.`3987`.IRI?
 
-        public let lang: IETF.RFC.`5646`.LanguageTag?
+        public let lang: IETF.RFC.`5646`.Tag?
 
         public init(
             authors: [Author] = [],
@@ -47,7 +47,7 @@ extension IETF.RFC.`4287` {
             title: Title? = nil,
             updated: IETF.RFC.`3339`.DateTime? = nil,
             base: IETF.RFC.`3987`.IRI? = nil,
-            lang: IETF.RFC.`5646`.LanguageTag? = nil
+            lang: IETF.RFC.`5646`.Tag? = nil
         ) {
             self.authors = authors
             self.categories = categories
@@ -83,7 +83,7 @@ extension IETF.RFC.`4287` {
             updated: IETF.RFC.`3339`.DateTime? = nil,
 
             base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-            lang: IETF.RFC.`5646`.LanguageTag? = nil
+            lang: IETF.RFC.`5646`.Tag? = nil
         ) {
             self.init(
                 authors: authors,

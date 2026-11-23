@@ -12,14 +12,14 @@ extension IETF.RFC.`4287` {
 
         public let base: IETF.RFC.`3987`.IRI?
 
-        public let lang: IETF.RFC.`5646`.LanguageTag?
+        public let lang: IETF.RFC.`5646`.Tag?
 
         public init(
             value: String,
             type: ContentType = .text,
 
             base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-            lang: IETF.RFC.`5646`.LanguageTag? = nil
+            lang: IETF.RFC.`5646`.Tag? = nil
         ) {
             self.value = value
             self.type = type
@@ -33,7 +33,7 @@ extension IETF.RFC.`4287` {
             mediaType: IETF.RFC.`9110`.MediaType,
 
             base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-            lang: IETF.RFC.`5646`.LanguageTag? = nil
+            lang: IETF.RFC.`5646`.Tag? = nil
         ) {
             self.value = rawBytes.map { Byte($0) }.base64()
             self.type = .media(mediaType)
@@ -46,7 +46,7 @@ extension IETF.RFC.`4287` {
             src: IETF.RFC.`3987`.IRI,
             type: ContentType = .text,
             base: IETF.RFC.`3987`.IRI? = nil,
-            lang: IETF.RFC.`5646`.LanguageTag? = nil
+            lang: IETF.RFC.`5646`.Tag? = nil
         ) {
             self.value = nil
             self.type = type
@@ -60,7 +60,7 @@ extension IETF.RFC.`4287` {
             type: ContentType = .text,
 
             base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-            lang: IETF.RFC.`5646`.LanguageTag? = nil
+            lang: IETF.RFC.`5646`.Tag? = nil
         ) {
             self.init(src: src.iri, type: type, base: base?.iri, lang: lang)
         }

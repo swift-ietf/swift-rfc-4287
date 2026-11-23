@@ -14,14 +14,14 @@ extension IETF.RFC.`4287` {
 
         public let base: IETF.RFC.`3987`.IRI?
 
-        public let lang: IETF.RFC.`5646`.LanguageTag?
+        public let lang: IETF.RFC.`5646`.Tag?
 
         public init(
             name: String,
             uri: IETF.RFC.`3987`.IRI? = nil,
             email: IETF.RFC.`2822`.AddrSpec? = nil,
             base: IETF.RFC.`3987`.IRI? = nil,
-            lang: IETF.RFC.`5646`.LanguageTag? = nil
+            lang: IETF.RFC.`5646`.Tag? = nil
         ) {
             self.name = name
             self.uri = uri
@@ -41,7 +41,7 @@ extension IETF.RFC.`4287`.Person {
         email: IETF.RFC.`2822`.AddrSpec? = nil,
 
         base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-        lang: IETF.RFC.`5646`.LanguageTag? = nil
+        lang: IETF.RFC.`5646`.Tag? = nil
     ) {
         self.init(name: name, uri: uri?.iri, email: email, base: base?.iri, lang: lang)
     }

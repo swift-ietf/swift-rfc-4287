@@ -19,7 +19,7 @@ extension IETF.RFC.`4287` {
 
         public let base: IETF.RFC.`3987`.IRI?
 
-        public let lang: IETF.RFC.`5646`.LanguageTag?
+        public let lang: IETF.RFC.`5646`.Tag?
 
         public init(
             href: IETF.RFC.`3987`.IRI,
@@ -29,7 +29,7 @@ extension IETF.RFC.`4287` {
             title: String? = nil,
             length: Int? = nil,
             base: IETF.RFC.`3987`.IRI? = nil,
-            lang: IETF.RFC.`5646`.LanguageTag? = nil
+            lang: IETF.RFC.`5646`.Tag? = nil
         ) {
             self.href = href
             self.rel = rel
@@ -50,7 +50,7 @@ extension IETF.RFC.`4287` {
             length: Int? = nil,
 
             base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-            lang: IETF.RFC.`5646`.LanguageTag? = nil
+            lang: IETF.RFC.`5646`.Tag? = nil
         ) {
             self.init(
                 href: href.iri,

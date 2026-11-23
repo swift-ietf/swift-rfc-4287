@@ -23,7 +23,7 @@ extension IETF.RFC.`4287`.Contributor {
         email: IETF.RFC.`2822`.AddrSpec? = nil,
 
         base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-        lang: IETF.RFC.`5646`.LanguageTag? = nil
+        lang: IETF.RFC.`5646`.Tag? = nil
     ) {
         self.person = .init(
             name: name,
@@ -45,7 +45,7 @@ extension IETF.RFC.`4287`.Contributor {
 
     public var base: IETF.RFC.`3987`.IRI? { person.base }
 
-    public var lang: IETF.RFC.`5646`.LanguageTag? { person.lang }
+    public var lang: IETF.RFC.`5646`.Tag? { person.lang }
 }
 
 extension IETF.RFC.`4287`.Contributor: ExpressibleByStringLiteral {

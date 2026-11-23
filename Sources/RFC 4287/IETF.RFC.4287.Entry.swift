@@ -31,7 +31,7 @@ extension IETF.RFC.`4287` {
 
         public let base: IETF.RFC.`3987`.IRI?
 
-        public let lang: IETF.RFC.`5646`.LanguageTag?
+        public let lang: IETF.RFC.`5646`.Tag?
     }
 }
 
@@ -51,7 +51,7 @@ extension IETF.RFC.`4287`.Entry {
         source: IETF.RFC.`4287`.Source? = nil,
         summary: IETF.RFC.`4287`.Summary? = nil,
         base: IETF.RFC.`3987`.IRI? = nil,
-        lang: IETF.RFC.`5646`.LanguageTag? = nil
+        lang: IETF.RFC.`5646`.Tag? = nil
     ) throws(Error) {
 
         let hasContent = content != nil
@@ -99,7 +99,7 @@ extension IETF.RFC.`4287`.Entry {
         summary: IETF.RFC.`4287`.Summary? = nil,
 
         base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-        lang: IETF.RFC.`5646`.LanguageTag? = nil
+        lang: IETF.RFC.`5646`.Tag? = nil
     ) throws(Error) {
         try self.init(
             id: id.iri,

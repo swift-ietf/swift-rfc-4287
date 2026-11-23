@@ -13,14 +13,14 @@ extension IETF.RFC.`4287` {
 
         public let base: IETF.RFC.`3987`.IRI?
 
-        public let lang: IETF.RFC.`5646`.LanguageTag?
+        public let lang: IETF.RFC.`5646`.Tag?
 
         public init(
             term: String,
             scheme: IETF.RFC.`3987`.IRI? = nil,
             label: String? = nil,
             base: IETF.RFC.`3987`.IRI? = nil,
-            lang: IETF.RFC.`5646`.LanguageTag? = nil
+            lang: IETF.RFC.`5646`.Tag? = nil
         ) {
             self.term = term
             self.scheme = scheme
@@ -41,7 +41,7 @@ extension IETF.RFC.`4287`.Category {
         label: String? = nil,
 
         base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-        lang: IETF.RFC.`5646`.LanguageTag? = nil
+        lang: IETF.RFC.`5646`.Tag? = nil
     ) {
         self.init(term: term, scheme: scheme?.iri, label: label, base: base?.iri, lang: lang)
     }

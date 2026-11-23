@@ -31,7 +31,7 @@ extension IETF.RFC.`4287`.Author {
 
     public var base: IETF.RFC.`3987`.IRI? { person.base }
 
-    public var lang: IETF.RFC.`5646`.LanguageTag? { person.lang }
+    public var lang: IETF.RFC.`5646`.Tag? { person.lang }
 }
 
 extension IETF.RFC.`4287`.Author {
@@ -43,7 +43,7 @@ extension IETF.RFC.`4287`.Author {
         email: IETF.RFC.`2822`.AddrSpec? = nil,
 
         base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-        lang: IETF.RFC.`5646`.LanguageTag? = nil
+        lang: IETF.RFC.`5646`.Tag? = nil
     ) {
         self.person = .init(
             name: name,

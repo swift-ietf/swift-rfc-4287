@@ -154,7 +154,7 @@
     }
 
     extension W3C.XML.Attribute {
-        static func common(base: IETF.RFC.`3987`.IRI?, lang: IETF.RFC.`5646`.LanguageTag?) -> [Self] {
+        static func common(base: IETF.RFC.`3987`.IRI?, lang: IETF.RFC.`5646`.Tag?) -> [Self] {
             [
                 base.map { W3C.XML.Attribute(name: W3C.XML.Name(local: "base", prefix: "xml"), value: $0.description) },
                 lang.map { W3C.XML.Attribute(name: W3C.XML.Name(local: "lang", prefix: "xml"), value: $0.description) },

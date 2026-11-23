@@ -31,7 +31,7 @@ extension IETF.RFC.`4287` {
 
         public let base: IETF.RFC.`3987`.IRI?
 
-        public let lang: IETF.RFC.`5646`.LanguageTag?
+        public let lang: IETF.RFC.`5646`.Tag?
 
         public let entries: [Entry]
     }
@@ -54,7 +54,7 @@ extension IETF.RFC.`4287`.Feed {
         rights: IETF.RFC.`4287`.Rights? = nil,
         subtitle: IETF.RFC.`4287`.Subtitle? = nil,
         base: IETF.RFC.`3987`.IRI? = nil,
-        lang: IETF.RFC.`5646`.LanguageTag? = nil
+        lang: IETF.RFC.`5646`.Tag? = nil
     ) throws(Error) {
 
         let feedHasAuthors = !authors.isEmpty
@@ -99,7 +99,7 @@ extension IETF.RFC.`4287`.Feed {
         subtitle: IETF.RFC.`4287`.Subtitle? = nil,
 
         base: (any IETF.RFC.`3987`.IRI.Representable)? = nil,
-        lang: IETF.RFC.`5646`.LanguageTag? = nil
+        lang: IETF.RFC.`5646`.Tag? = nil
     ) throws(Error) {
         try self.init(
             id: id.iri,
